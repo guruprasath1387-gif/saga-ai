@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#040406">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="SAGA AI">
+<meta name="description" content="SAGA AI - World's most powerful AI by Guruprasath S B, Hosur">
+<title>SAGA AI 99% — Built by Guruprasath S B</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700;800&family=Cabinet+Grotesk:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pptxgenjs/3.12.0/pptxgen.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- Prism.js syntax highlighting -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<!-- KaTeX math rendering -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<!-- Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#f4f4f8;--s1:#ffffff;--s2:#f0f0f5;--s3:#e8e8f0;
+  --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.14);
+  --c1:#00b894;--c2:#6c5ce7;--c3:#e17055;--c4:#fdcb6e;--c5:#00cec9;
+  --text:#1a1a2e;--muted:#8888a8;--muted2:#5a5a78;
+  --fh:'Clash Display',sans-serif;--fb:'Cabinet Grotesk',sans-serif;--fm:'JetBrains Mono',monospace;
+}
+.dark-mode{
+  --bg:#040406;--s1:#0c0c14;--s2:#13131e;--s3:#1c1c2a;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);
+  --c1:#00f5c4;--c2:#7b5ea7;--c3:#ff6b6b;--c4:#ffd166;--c5:#06d6a0;
+  --text:#eeeef5;--muted:#5a5a78;--muted2:#9090b2;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--fb);overflow:hidden;transition:background .3s,color .3s;}
+::-webkit-scrollbar{width:3px;height:3px;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 55% 45% at 10% 8%,rgba(0,184,148,0.08),transparent 60%),
+             radial-gradient(ellipse 45% 40% at 88% 88%,rgba(108,92,231,0.06),transparent 55%);}
+.app{display:flex;height:100vh;position:relative;z-index:1;}
+
+/* SIDEBAR */
+.sidebar{width:225px;min-width:225px;background:var(--s1);border-right:1px solid var(--border);display:flex;flex-direction:column;transition:transform .3s,background .3s;}
+@media(max-width:768px){.sidebar{position:fixed;inset:0;right:auto;width:260px;z-index:200;transform:translateX(-100%);}.sidebar.open{transform:translateX(0);}.overlay{display:block!important;}}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:199;}
+.brand{padding:14px 13px 12px;border-bottom:1px solid var(--border);}
+.brand-row{display:flex;align-items:center;gap:9px;}
+.bicon{position:relative;width:34px;height:34px;border-radius:10px;background:var(--s3);border:1px solid rgba(0,245,196,0.22);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
+.bicon::before{content:'';position:absolute;inset:-5px;background:conic-gradient(from 0deg,var(--c1),var(--c2),var(--c1));animation:cspin 4s linear infinite;opacity:.38;}
+@keyframes cspin{to{transform:rotate(360deg)}}
+.bi{position:relative;z-index:1;font-size:15px;}
+.bname{font-family:var(--fh);font-size:18px;font-weight:800;background:linear-gradient(90deg,var(--c1),#9aeaea);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.btag{font-size:9px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;}
+.nav{flex:1;padding:8px 7px;overflow-y:auto;}
+.nl{font-size:9px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;padding:9px 8px 3px;}
+.ni{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:9px;cursor:pointer;border:none;background:transparent;width:100%;text-align:left;color:var(--muted2);font-family:var(--fb);font-size:12.5px;transition:all .14s;margin-bottom:1px;}
+.ni:hover{background:var(--s2);color:var(--text);}
+.ni.active{background:linear-gradient(90deg,rgba(0,245,196,0.1),rgba(0,245,196,0.03));color:var(--c1);border:1px solid rgba(0,245,196,0.1);}
+.ni-ic{font-size:13px;width:18px;text-align:center;flex-shrink:0;}
+.sf{padding:10px;border-top:1px solid var(--border);}
+.cc{background:var(--s2);border:1px solid var(--border);border-radius:9px;padding:9px 11px;}
+.cc strong{color:var(--c1);font-size:11px;display:block;margin-bottom:2px;}
+.cc .cl{font-size:10px;color:var(--muted2);line-height:1.55;}
+.online{display:flex;align-items:center;gap:5px;margin-top:5px;}
+.odot{width:6px;height:6px;border-radius:50%;background:var(--c1);box-shadow:0 0 6px var(--c1);animation:op 2s infinite;}
+@keyframes op{0%,100%{opacity:1}50%{opacity:.3}}
+.otxt{font-size:10px;color:var(--muted2);}
+
+/* MAIN */
+.main{flex:1;display:flex;flex-direction:column;min-width:0;overflow:hidden;}
+.topbar{padding:10px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;flex-shrink:0;background:rgba(244,244,248,0.92);backdrop-filter:blur(16px);}
+.dark-mode .topbar{background:rgba(4,4,6,0.88);}
+.mbtn{background:transparent;border:none;color:var(--muted2);font-size:18px;cursor:pointer;display:none;padding:2px;}
+@media(max-width:768px){.mbtn{display:flex;align-items:center;}}
+.tb-title{font-family:var(--fh);font-size:13px;font-weight:600;flex:1;}
+.tb-right{display:flex;align-items:center;gap:5px;}
+.pill{padding:3px 8px;border-radius:20px;font-size:9px;border:1px solid var(--border2);color:var(--muted2);}
+.pill.live{border-color:rgba(0,245,196,0.28);color:var(--c1);}
+.mbadge{min-width:18px;height:18px;border-radius:9px;background:var(--s3);border:1px solid var(--border2);font-size:9px;color:var(--muted2);display:flex;align-items:center;justify-content:center;padding:0 5px;}
+.theme-btn{background:transparent;border:1px solid var(--border2);border-radius:7px;color:var(--muted2);cursor:pointer;font-size:13px;padding:3px 7px;}
+.panel{display:none;flex:1;flex-direction:column;overflow:hidden;}
+.panel.active{display:flex;}
+
+/* CHAT */
+.chat-wrap{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:12px;scroll-behavior:smooth;}
+.lang-bar{display:flex;gap:4px;padding:7px 14px;border-bottom:1px solid var(--border);background:var(--s1);flex-shrink:0;overflow-x:auto;}
+.lb{padding:4px 10px;border-radius:8px;font-size:11px;border:1px solid var(--border);color:var(--muted2);cursor:pointer;background:transparent;white-space:nowrap;font-family:var(--fb);transition:all .12s;}
+.lb.active{border-color:rgba(0,245,196,0.3);color:var(--c1);background:rgba(0,245,196,0.05);}
+.welcome{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;gap:14px;}
+.w-orb{width:60px;height:60px;border-radius:18px;background:linear-gradient(135deg,var(--s3),var(--s2));border:1px solid rgba(0,245,196,0.18);display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 0 40px rgba(0,245,196,0.08);animation:wfloat 3.5s ease-in-out infinite;}
+@keyframes wfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.welcome h2{font-family:var(--fh);font-size:22px;font-weight:800;background:linear-gradient(135deg,var(--text),var(--muted2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.welcome p{color:var(--muted2);font-size:12px;max-width:340px;line-height:1.7;}
+.feat-row{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;max-width:460px;}
+.feat{padding:3px 8px;border-radius:12px;font-size:10px;border:1px solid var(--border2);color:var(--muted2);background:var(--s2);}
+.sug-grid{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;max-width:500px;}
+.sug{padding:5px 10px;border-radius:14px;font-size:11px;border:1px solid var(--border2);color:var(--muted2);background:var(--s2);cursor:pointer;transition:all .13s;}
+.sug:hover{border-color:var(--c1);color:var(--c1);background:rgba(0,245,196,0.04);}
+.msg{display:flex;gap:8px;animation:min .2s ease;}
+@keyframes min{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.msg.user{flex-direction:row-reverse;}
+.av{width:27px;height:27px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;}
+.av.ai{background:linear-gradient(135deg,rgba(0,245,196,0.2),rgba(123,94,167,0.18));border:1px solid rgba(0,245,196,0.18);}
+.av.user{background:var(--s3);border:1px solid var(--border2);}
+.bub{max-width:82%;padding:9px 13px;border-radius:12px;font-size:13px;line-height:1.75;}
+.msg.ai .bub{background:#ffffff;border:1px solid var(--border2);border-top-left-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,0.06);}
+.msg.user .bub{background:linear-gradient(135deg,rgba(0,184,148,0.12),rgba(108,92,231,0.08));border:1px solid rgba(0,184,148,0.2);border-top-right-radius:3px;}
+.bub pre{background:#1e1e2e;border:1px solid var(--border2);border-radius:7px;padding:10px;margin:7px 0;overflow-x:auto;font-family:var(--fm);font-size:11px;line-height:1.55;}
+.bub code{font-family:var(--fm);background:rgba(0,245,196,0.07);padding:1px 4px;border-radius:3px;font-size:11px;color:var(--c1);}
+.bub strong{color:var(--c1);}
+.bub h3{font-family:var(--fh);font-size:13px;margin:8px 0 3px;color:var(--text);}
+.bub ul,.bub ol{padding-left:14px;margin:4px 0;}
+.bub li{margin:2px 0;color:var(--muted2);}
+.bub li::marker{color:var(--c1);}
+.img-prev{max-width:200px;border-radius:8px;border:1px solid var(--border2);margin-bottom:5px;display:block;}
+.fc{display:inline-flex;align-items:center;gap:5px;background:var(--s2);border:1px solid var(--border2);border-radius:7px;padding:4px 8px;font-size:11px;color:var(--muted2);margin-bottom:5px;}
+.tag-s{display:inline-flex;align-items:center;gap:4px;background:rgba(255,209,102,0.07);border:1px solid rgba(255,209,102,0.2);border-radius:5px;padding:2px 7px;font-size:10px;color:var(--c4);margin-bottom:5px;}
+.tag-m{display:inline-flex;align-items:center;gap:4px;background:rgba(0,245,196,0.05);border:1px solid rgba(0,245,196,0.14);border-radius:5px;padding:2px 7px;font-size:10px;color:var(--c1);margin-bottom:4px;}
+.action-row{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;}
+.ab{padding:3px 8px;border-radius:6px;border:1px solid;font-size:10px;cursor:pointer;font-family:var(--fb);background:transparent;transition:all .12s;}
+.ab:hover{opacity:.72;}
+.a-copy{border-color:rgba(0,245,196,0.22);color:var(--c1);}
+.a-dl{border-color:rgba(0,245,196,0.22);color:var(--c1);}
+.a-html{border-color:rgba(123,94,167,0.3);color:#a78fe8;}
+.a-word{border-color:rgba(100,149,237,0.3);color:#6495ed;}
+.a-pdf{border-color:rgba(255,107,107,0.3);color:var(--c3);}
+.a-xlsx{border-color:rgba(0,200,83,0.3);color:#00c853;}
+.a-pptx{border-color:rgba(255,109,0,0.3);color:#ff6d00;}
+.a-share{border-color:rgba(37,211,102,0.35);color:#25d366;}
+.a-speak{border-color:rgba(6,214,160,0.3);color:#06d6a0;}
+.a-run{border-color:rgba(255,209,102,0.3);color:var(--c4);}
+.a-img{border-color:rgba(216,90,48,0.3);color:#D85A30;}
+.trow{display:flex;align-items:center;gap:4px;padding:3px 0;}
+.td{width:5px;height:5px;border-radius:50%;background:var(--c1);animation:td 1s infinite;}
+.td:nth-child(2){animation-delay:.14s}.td:nth-child(3){animation-delay:.28s}
+@keyframes td{0%,60%,100%{opacity:.2;transform:scale(1)}30%{opacity:1;transform:scale(1.3)}}
+
+/* HISTORY PANEL */
+.hist-list{padding:12px 16px;}
+.hist-item{background:var(--s1);border:1px solid var(--border);border-radius:9px;padding:10px 12px;margin-bottom:7px;cursor:pointer;transition:all .14s;}
+.hist-item:hover{border-color:var(--c1);}
+.hist-title{font-size:12px;color:var(--text);margin-bottom:3px;font-weight:500;}
+.hist-preview{font-size:11px;color:var(--muted2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.hist-time{font-size:10px;color:var(--muted);margin-top:3px;}
+.hist-del{float:right;background:transparent;border:none;color:var(--c3);cursor:pointer;font-size:12px;}
+
+/* INPUT */
+.input-dock{padding:9px 14px 12px;border-top:1px solid var(--border);flex-shrink:0;background:rgba(244,244,248,0.97);backdrop-filter:blur(16px);}
+.dark-mode .input-dock{background:rgba(4,4,6,0.95);}
+.attach-prev{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px;}
+.att-item{position:relative;display:inline-flex;align-items:center;gap:5px;background:var(--s2);border:1px solid var(--border2);border-radius:7px;padding:4px 8px;font-size:11px;color:var(--muted2);}
+.att-img{width:30px;height:30px;border-radius:4px;object-fit:cover;}
+.att-rm{position:absolute;top:-5px;right:-5px;width:13px;height:13px;border-radius:50%;background:var(--c3);border:none;color:#fff;font-size:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.tog-row{display:flex;gap:4px;margin-bottom:6px;flex-wrap:wrap;}
+.tog{display:flex;align-items:center;gap:3px;padding:3px 8px;border-radius:8px;font-size:10px;border:1px solid var(--border);color:var(--muted);cursor:pointer;background:transparent;font-family:var(--fb);transition:all .12s;}
+.tog.on{border-color:rgba(255,209,102,0.4);color:var(--c4);background:rgba(255,209,102,0.05);}
+.tog.mem-on{border-color:rgba(0,245,196,0.3);color:var(--c1);background:rgba(0,245,196,0.05);}
+.tog.deep-on{border-color:rgba(123,94,167,0.4);color:#a78fe8;background:rgba(123,94,167,0.06);}
+.mode-strip{display:flex;gap:3px;margin-bottom:6px;flex-wrap:wrap;}
+.mc{padding:3px 8px;border-radius:8px;font-size:10px;border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all .12s;background:transparent;font-family:var(--fb);}
+.mc:hover,.mc.sel{border-color:rgba(0,245,196,0.3);color:var(--c1);background:rgba(0,245,196,0.05);}
+.ibox{display:flex;gap:5px;align-items:flex-end;background:var(--s2);border:1px solid var(--border2);border-radius:12px;padding:7px 9px;transition:border-color .16s;}
+.ibox:focus-within{border-color:rgba(0,245,196,0.3);box-shadow:0 0 16px rgba(0,245,196,0.04);}
+.ibtns{display:flex;align-items:center;gap:1px;}
+.ibtn{width:28px;height:28px;border-radius:7px;border:none;background:transparent;color:var(--muted2);cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;transition:all .12s;}
+.ibtn:hover{background:var(--s3);color:var(--c1);}
+.ibtn.recording{color:var(--c3);animation:rp .7s infinite;}
+@keyframes rp{0%,100%{opacity:1}50%{opacity:.4}}
+#inp{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:13px;resize:none;max-height:90px;line-height:1.5;}
+#inp::placeholder{color:var(--muted);}
+.sbtn{width:30px;height:30px;border-radius:8px;border:none;background:linear-gradient(135deg,var(--c1),#06d6a0);color:#040406;cursor:pointer;font-size:13px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;box-shadow:0 0 12px rgba(0,245,196,0.2);transition:all .13s;}
+.sbtn:hover{opacity:.85;}
+.sbtn:disabled{opacity:.3;cursor:not-allowed;box-shadow:none;}
+.hint{font-size:10px;color:var(--muted);text-align:center;margin-top:5px;}
+#fileImg,#filePdf{display:none;}
+
+/* GENERATED IMAGE */
+.gen-img{max-width:300px;border-radius:10px;border:2px solid var(--c1);margin:8px 0;display:block;}
+
+/* PRISM SYNTAX HIGHLIGHTING */
+.bub pre[class*="language-"]{background:#1e1e2e!important;border:1px solid var(--border2)!important;border-radius:8px!important;padding:12px!important;margin:8px 0!important;font-size:11.5px!important;line-height:1.6!important;overflow-x:auto!important;}
+.bub code[class*="language-"]{background:transparent!important;padding:0!important;font-size:11.5px!important;color:inherit!important;}
+.token.keyword{color:#ff79c6!important;}.token.string{color:#f1fa8c!important;}.token.comment{color:#6272a4!important;font-style:italic;}
+.token.function{color:#50fa7b!important;}.token.number{color:#bd93f9!important;}.token.operator{color:#ff79c6!important;}
+.token.class-name{color:#8be9fd!important;}.token.boolean{color:#bd93f9!important;}.token.builtin{color:#8be9fd!important;}
+/* KATEX MATH */
+.bub .math-block{background:var(--s2);border:1px solid var(--border2);border-radius:7px;padding:10px 14px;margin:8px 0;overflow-x:auto;text-align:center;}
+.bub .math-inline{background:rgba(123,94,167,0.1);padding:1px 5px;border-radius:4px;}
+.katex{font-size:1.08em!important;}
+/* CHART */
+.chart-wrap{background:var(--s2);border:1px solid var(--border2);border-radius:9px;padding:12px;margin:10px 0;position:relative;}
+.chart-wrap canvas{max-height:260px!important;}
+/* STREAMING CURSOR */
+.stream-cursor::after{content:'▋';display:inline-block;animation:blink .65s infinite;color:var(--c1);margin-left:1px;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+/* CODE COPY BUTTON */
+.code-copy-wrap{position:relative;}
+.code-copy-btn{position:absolute;top:7px;right:7px;padding:3px 8px;border-radius:5px;border:1px solid var(--border2);background:var(--s3);color:var(--muted2);font-size:10px;cursor:pointer;font-family:var(--fb);z-index:1;}
+.code-copy-btn:hover{color:var(--c1);border-color:rgba(0,245,196,0.3);}
+
+/* TOOLS */
+.tgrid{padding:14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;overflow-y:auto;}
+.tc{background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:12px;cursor:pointer;transition:all .15s;}
+.tc:hover{border-color:var(--border2);transform:translateY(-2px);}
+.tc-icon{font-size:20px;margin-bottom:7px;}
+.tc-name{font-family:var(--fh);font-size:12px;font-weight:600;margin-bottom:2px;}
+.tc-desc{font-size:10.5px;color:var(--muted2);line-height:1.5;}
+.tc-tag{display:inline-block;margin-top:5px;padding:2px 6px;border-radius:7px;font-size:9px;border:1px solid;letter-spacing:.04em;text-transform:uppercase;}
+.free{border-color:rgba(0,245,196,0.3);color:var(--c1);}
+.pro{border-color:rgba(123,94,167,0.35);color:#a78fe8;}
+
+/* IMAGE GEN */
+.imggen-panel{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.imggen-ctrl{padding:12px 16px;border-bottom:1px solid var(--border);}
+.imggen-ctrl h3{font-family:var(--fh);font-size:14px;margin-bottom:9px;}
+.prow{display:flex;gap:6px;margin-bottom:7px;}
+.pinp{flex:1;background:var(--s2);border:1px solid var(--border2);border-radius:8px;padding:8px 10px;color:var(--text);font-family:var(--fb);font-size:12.5px;outline:none;}
+.pinp:focus{border-color:rgba(0,245,196,0.3);}
+.gbtn{padding:7px 14px;border-radius:8px;border:none;background:linear-gradient(135deg,var(--c1),#06d6a0);color:#040406;font-family:var(--fh);font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;}
+.schips{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px;}
+.sc{padding:3px 8px;border-radius:6px;font-size:11px;border:1px solid var(--border);color:var(--muted2);cursor:pointer;background:transparent;transition:all .12s;}
+.sc.sel,.sc:hover{border-color:rgba(0,245,196,0.3);color:var(--c1);}
+.upzone{border:1.5px dashed var(--border2);border-radius:8px;padding:9px;text-align:center;cursor:pointer;font-size:11px;color:var(--muted2);transition:all .12s;}
+.upzone:hover{border-color:var(--c1);color:var(--c1);}
+.imggen-out{flex:1;overflow-y:auto;padding:12px 16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:9px;align-content:start;}
+.iph{background:var(--s2);border:1px solid var(--border);border-radius:9px;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;color:var(--muted);font-size:12px;}
+.iph.loading{animation:shimmer 1.3s infinite;}
+@keyframes shimmer{0%,100%{opacity:.4}50%{opacity:.9}}
+.real-img-card{background:var(--s1);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.real-img-card img{width:100%;display:block;}
+.real-img-card .img-info{padding:10px 12px;}
+
+/* CODE RUNNER */
+.code-panel{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.code-top{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+.lang-sel{background:var(--s2);border:1px solid var(--border2);border-radius:7px;padding:6px 10px;color:var(--text);font-family:var(--fm);font-size:11px;outline:none;}
+.run-btn{padding:7px 14px;border-radius:8px;border:none;background:linear-gradient(135deg,var(--c4),#ffaa00);color:#040406;font-family:var(--fh);font-size:12px;font-weight:700;cursor:pointer;}
+.clear-btn{padding:7px 11px;border-radius:8px;border:1px solid var(--border2);background:transparent;color:var(--muted2);font-family:var(--fb);font-size:12px;cursor:pointer;}
+.ai-btn{padding:7px 12px;border-radius:8px;border:none;background:linear-gradient(135deg,var(--c1),#06d6a0);color:#040406;font-family:var(--fh);font-size:12px;font-weight:700;cursor:pointer;margin-left:auto;}
+.code-body{flex:1;display:flex;overflow:hidden;}
+.code-editor{flex:1;background:#1e1e2e;border:none;outline:none;color:#a8ff78;font-family:var(--fm);font-size:12px;padding:12px;resize:none;line-height:1.6;border-right:1px solid var(--border);}
+.code-out{width:42%;background:#0d0d1a;color:#a8ff78;font-family:var(--fm);font-size:11px;padding:12px;overflow-y:auto;line-height:1.6;white-space:pre-wrap;}
+.out-lbl{font-size:9px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px;}
+@media(max-width:600px){.code-body{flex-direction:column;}.code-editor{min-height:180px;border-right:none;border-bottom:1px solid var(--border);}.code-out{width:100%;}}
+
+/* FILE CREATOR */
+.fc-panel{flex:1;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;padding:13px;overflow-y:auto;align-content:start;}
+.fc-card{background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:13px;display:flex;flex-direction:column;gap:8px;}
+.fc-title{font-family:var(--fh);font-size:13px;}
+.fc-desc{font-size:10.5px;color:var(--muted2);line-height:1.5;}
+.fc-inp{width:100%;background:var(--s2);border:1px solid var(--border2);border-radius:7px;padding:7px 10px;color:var(--text);font-family:var(--fb);font-size:12px;outline:none;resize:vertical;min-height:56px;}
+.fc-inp:focus{border-color:rgba(0,245,196,0.3);}
+.fc-btn{padding:8px;border-radius:8px;border:none;font-family:var(--fh);font-size:12px;font-weight:700;cursor:pointer;transition:opacity .13s;width:100%;}
+.fc-btn:hover{opacity:.85;}
+.xlsx-b{background:linear-gradient(135deg,#00c853,#00a043);color:#fff;}
+.pptx-b{background:linear-gradient(135deg,#ff6d00,#e65100);color:#fff;}
+.word-b{background:linear-gradient(135deg,#1565c0,#0d47a1);color:#fff;}
+.pdf-b{background:linear-gradient(135deg,var(--c3),#c0392b);color:#fff;}
+.csv-b{background:linear-gradient(135deg,var(--c1),#06d6a0);color:#040406;}
+
+/* MEMORY */
+.mem-panel{flex:1;padding:13px;overflow-y:auto;}
+.mem-add{display:flex;gap:6px;margin-bottom:11px;}
+.mem-inp{flex:1;background:var(--s2);border:1px solid var(--border2);border-radius:8px;padding:8px 11px;color:var(--text);font-family:var(--fb);font-size:12px;outline:none;}
+.mem-inp:focus{border-color:rgba(0,245,196,0.3);}
+.mem-add-btn{padding:8px 13px;border-radius:8px;border:none;background:linear-gradient(135deg,var(--c1),#06d6a0);color:#040406;font-family:var(--fh);font-size:12px;font-weight:700;cursor:pointer;}
+.mem-item{background:var(--s1);border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:flex-start;gap:7px;}
+.mem-txt{font-size:12px;color:var(--muted2);flex:1;line-height:1.6;}
+.mem-del{background:transparent;border:none;color:var(--c3);cursor:pointer;font-size:13px;}
+
+/* PLANS */
+.plans-panel{flex:1;padding:14px;overflow-y:auto;}
+.plans-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:11px;margin-bottom:16px;}
+.plan-card{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;position:relative;}
+.plan-card.pop{border-color:rgba(0,245,196,0.35);box-shadow:0 0 28px rgba(0,245,196,0.06);}
+.plan-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--c1);color:#040406;font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;font-family:var(--fh);white-space:nowrap;}
+.plan-name{font-family:var(--fh);font-size:15px;font-weight:700;margin-bottom:5px;}
+.plan-price{font-family:var(--fh);font-size:26px;font-weight:800;color:var(--c1);margin-bottom:2px;}
+.plan-period{font-size:10px;color:var(--muted2);margin-bottom:11px;}
+.plan-feats{font-size:11px;color:var(--muted2);line-height:2;margin-bottom:12px;text-align:left;}
+.plan-btn{width:100%;padding:9px;border-radius:9px;border:none;font-family:var(--fh);font-size:12px;font-weight:700;cursor:pointer;}
+.plan-btn:hover{opacity:.85;}
+.free-b{background:var(--s3);color:var(--text);border:1px solid var(--border2);}
+.pay-b{background:linear-gradient(135deg,var(--c1),#06d6a0);color:#040406;}
+.biz-b{background:linear-gradient(135deg,var(--c2),#9b59b6);color:#fff;}
+.ub{background:var(--s2);border:1px solid var(--border);border-radius:9px;padding:12px;margin-bottom:12px;}
+.ub-lbl{font-size:11px;color:var(--muted2);margin-bottom:5px;}
+.ub-track{background:var(--s3);border-radius:5px;height:6px;overflow:hidden;}
+.ub-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--c1),#06d6a0);transition:width .5s;}
+
+/* STUDENT & BIZ */
+.grid-panel{flex:1;overflow-y:auto;padding:13px;}
+.mode-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:9px;}
+.mcard{background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:13px;cursor:pointer;transition:all .15s;}
+.mcard:hover{border-color:var(--c1);transform:translateY(-2px);}
+.mcard-icon{font-size:22px;margin-bottom:7px;}
+.mcard-name{font-family:var(--fh);font-size:12px;margin-bottom:2px;}
+.mcard-desc{font-size:10.5px;color:var(--muted2);line-height:1.5;}
+
+/* POWER SUITE */
+.ps-wrap{flex:1;display:flex;overflow:hidden;}
+.ps-side{width:165px;border-right:1px solid var(--border);padding:9px 6px;display:flex;flex-direction:column;gap:2px;overflow-y:auto;flex-shrink:0;}
+.pt{padding:7px 9px;border-radius:7px;font-size:11.5px;color:var(--muted2);cursor:pointer;border:none;background:transparent;text-align:left;font-family:var(--fb);transition:all .12s;}
+.pt:hover{background:var(--s2);color:var(--text);}
+.pt.active{background:var(--s2);color:var(--c1);}
+.ps-content{flex:1;padding:14px 16px;overflow-y:auto;}
+.ps-title{font-family:var(--fh);font-size:14px;margin-bottom:11px;}
+.pform{display:flex;flex-direction:column;gap:8px;}
+.plbl{font-size:10px;color:var(--muted2);margin-bottom:1px;letter-spacing:.04em;}
+.pinput{width:100%;background:var(--s2);border:1px solid var(--border2);border-radius:7px;padding:7px 10px;color:var(--text);font-family:var(--fb);font-size:12.5px;outline:none;}
+.pinput:focus{border-color:rgba(0,245,196,0.3);}
+textarea.pinput{resize:vertical;min-height:62px;}
+.prun{align-self:flex-start;padding:8px 16px;border-radius:8px;border:none;background:linear-gradient(135deg,var(--c1),#06d6a0);color:#040406;font-family:var(--fh);font-size:12px;font-weight:700;cursor:pointer;}
+.presult{margin-top:11px;background:var(--s1);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:12.5px;line-height:1.8;color:var(--muted2);white-space:pre-wrap;display:none;}
+
+/* STATS */
+.sp{flex:1;padding:13px;overflow-y:auto;}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-bottom:13px;}
+.sc2{background:var(--s1);border:1px solid var(--border);border-radius:9px;padding:12px;}
+.slbl{font-size:9px;color:var(--muted2);margin-bottom:4px;letter-spacing:.04em;}
+.sval{font-family:var(--fh);font-size:22px;font-weight:700;}
+.ssub{font-size:10px;color:var(--muted);margin-top:2px;}
+.hi{display:flex;align-items:center;gap:7px;padding:7px 9px;background:var(--s1);border:1px solid var(--border);border-radius:7px;margin-bottom:4px;}
+.hiic{font-size:12px;}.hitx{font-size:11px;color:var(--muted2);flex:1;}.hitm{font-size:10px;color:var(--muted);}
+.digest-card{background:linear-gradient(135deg,rgba(255,209,102,0.07),rgba(0,245,196,0.05));border:1px solid rgba(255,209,102,0.15);border-radius:9px;padding:11px 13px;margin-bottom:12px;font-size:11.5px;color:var(--muted2);line-height:1.7;}
+.digest-card strong{color:var(--c4);display:block;margin-bottom:3px;}
+
+/* ROADMAP */
+.rp{flex:1;padding:13px;overflow-y:auto;}
+.rcard{background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:13px;margin-bottom:9px;}
+.rph{font-family:var(--fh);font-size:13px;margin-bottom:7px;}
+.rls{font-size:11.5px;color:var(--muted2);line-height:1.95;}
+
+/* SETUP */
+.setup-panel{flex:1;padding:13px;overflow-y:auto;}
+.setup-card{background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:13px;margin-bottom:9px;}
+.setup-card h4{font-family:var(--fh);font-size:13px;margin-bottom:7px;}
+.setup-card p{font-size:11px;color:var(--muted2);line-height:1.7;margin-bottom:7px;}
+.api-inp{width:100%;background:var(--s2);border:1px solid var(--border2);border-radius:7px;padding:7px 10px;color:var(--text);font-family:var(--fm);font-size:11px;outline:none;margin-bottom:6px;}
+.api-inp:focus{border-color:rgba(0,245,196,0.3);}
+.save-btn{padding:7px 13px;border-radius:7px;border:none;background:linear-gradient(135deg,var(--c1),#06d6a0);color:#040406;font-family:var(--fh);font-size:11px;font-weight:700;cursor:pointer;}
+.saved-msg{font-size:10px;color:var(--c1);margin-left:7px;}
+
+/* INSTALL BANNER */
+.inst-banner{background:linear-gradient(90deg,rgba(0,245,196,0.08),rgba(123,94,167,0.06));border-bottom:1px solid rgba(0,245,196,0.14);padding:7px 14px;display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--text);flex-shrink:0;}
+.inst-btn{padding:5px 11px;border-radius:7px;border:none;background:var(--c1);color:#040406;font-family:var(--fh);font-size:11px;font-weight:700;cursor:pointer;}
+.dism-btn{background:transparent;border:none;color:var(--muted2);cursor:pointer;font-size:14px;padding:2px 5px;}
+
+/* MODALS */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:300;align-items:center;justify-content:center;padding:16px;}
+.modal.open{display:flex;}
+.mbox{background:var(--s1);border:1px solid var(--border2);border-radius:14px;padding:16px;width:440px;max-width:100%;}
+.mbox-title{font-family:var(--fh);font-size:14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;}
+.mclose{background:transparent;border:none;color:var(--muted2);font-size:17px;cursor:pointer;}
+#camVideo{width:100%;border-radius:8px;background:#000;}
+.cam-btns{display:flex;gap:7px;margin-top:10px;}
+.cbtn{flex:1;padding:8px;border-radius:8px;border:none;font-family:var(--fh);font-size:12px;font-weight:600;cursor:pointer;}
+.cbtn.snap{background:linear-gradient(135deg,var(--c1),#06d6a0);color:#040406;}
+.cbtn.cancel{background:var(--s3);color:var(--text);}
+
+/* VOICE TOAST */
+.vtoast{position:fixed;bottom:75px;left:50%;transform:translateX(-50%);background:var(--s1);border:1px solid rgba(255,107,107,0.3);border-radius:9px;padding:7px 14px;font-size:11px;color:var(--c3);display:none;align-items:center;gap:6px;z-index:50;white-space:nowrap;}
+.vtoast.show{display:flex;}
+.vpulse{width:7px;height:7px;border-radius:50%;background:var(--c3);animation:rp .7s infinite;}
+</style>
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="modal" id="camModal">
+  <div class="mbox">
+    <div class="mbox-title">📷 Camera <button class="mclose" onclick="closeCamera()">✕</button></div>
+    <video id="camVideo" autoplay playsinline></video>
+    <canvas id="camCanvas" style="display:none"></canvas>
+    <div class="cam-btns"><button class="cbtn snap" onclick="snapPhoto()">📸 Capture</button><button class="cbtn cancel" onclick="closeCamera()">Cancel</button></div>
+  </div>
+</div>
+<div class="vtoast" id="vtoast"><div class="vpulse"></div><span id="vtxt">Listening...</span></div>
+<input type="file" id="fileImg" accept="image/*" onchange="handleImg(event)">
+<input type="file" id="filePdf" accept=".pdf,.txt,.csv,.md,.html,.js,.py,.json" onchange="handleFile(event)">
+
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-row">
+        <div class="bicon"><div class="bi">⚡</div></div>
+        <div><div class="bname">SAGA AI</div><div class="btag">100% Ultimate</div></div>
+      </div>
+    </div>
+    <nav class="nav">
+      <div class="nl">Core</div>
+      <button class="ni active" onclick="sw('chat',this)"><span class="ni-ic">💬</span> AI Chat</button>
+      <button class="ni" onclick="sw('history',this)"><span class="ni-ic">📜</span> Chat History</button>
+      <button class="ni" onclick="sw('tools',this)"><span class="ni-ic">🛠️</span> All Tools</button>
+      <button class="ni" onclick="sw('imggen',this)"><span class="ni-ic">🎨</span> Image Studio</button>
+      <div class="nl">Power</div>
+      <button class="ni" onclick="sw('code',this)"><span class="ni-ic">💻</span> Code Runner</button>
+      <button class="ni" onclick="sw('files',this)"><span class="ni-ic">📁</span> File Creator</button>
+      <button class="ni" onclick="sw('memory',this)"><span class="ni-ic">🧠</span> Memory</button>
+      <div class="nl">Modes</div>
+      <button class="ni" onclick="sw('student',this)"><span class="ni-ic">🎓</span> Student Mode</button>
+      <button class="ni" onclick="sw('business',this)"><span class="ni-ic">🏭</span> Business Mode</button>
+      <button class="ni" onclick="sw('plans',this)"><span class="ni-ic">💳</span> Plans & Pricing</button>
+      <div class="nl">More</div>
+      <button class="ni" onclick="sw('prod',this)"><span class="ni-ic">⚡</span> Power Suite</button>
+      <button class="ni" onclick="sw('stats',this)"><span class="ni-ic">📊</span> Dashboard</button>
+      <button class="ni" onclick="sw('roadmap',this)"><span class="ni-ic">💰</span> Money Roadmap</button>
+      <button class="ni" onclick="sw('setup',this)"><span class="ni-ic">⚙️</span> Setup</button>
+    </nav>
+    <div class="sf">
+      <div class="cc">
+        <strong>SAGA AI 99% v6</strong>
+        <div class="cl">Guruprasath S B<br>Hosur, Tamil Nadu, India</div>
+        <div class="online"><div class="odot"></div><div class="otxt">All systems 100%</div></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <button class="mbtn" onclick="openSidebar()">☰</button>
+      <div class="tb-title" id="topTitle">💬 AI Chat</div>
+      <div class="tb-right">
+        <span class="pill live">● LIVE</span>
+        <span class="pill" id="sPill" style="display:none">🌐</span>
+        <span class="pill" id="mPill" style="display:none">🧠</span>
+        <span class="pill" id="lPill">EN</span>
+        <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
+        <span class="mbadge" id="mbadge">0</span>
+      </div>
+    </div>
+    <div class="inst-banner" id="instBanner" style="display:none">
+      📱 Install SAGA AI on your phone!
+      <div style="display:flex;gap:6px;align-items:center;">
+        <button class="inst-btn" id="instBtn">Install App</button>
+        <button class="dism-btn" onclick="document.getElementById('instBanner').style.display='none'">✕</button>
+      </div>
+    </div>
+
+    <!-- CHAT PANEL -->
+    <div class="panel active" id="panel-chat">
+      <div class="lang-bar">
+        <button class="lb active" onclick="setLang('en',this)">🇬🇧 English</button>
+        <button class="lb" onclick="setLang('ta',this)">🇮🇳 தமிழ்</button>
+        <button class="lb" onclick="setLang('hi',this)">🇮🇳 हिंदी</button>
+        <button class="lb" onclick="setLang('te',this)">🇮🇳 తెలుగు</button>
+        <button class="lb" onclick="setLang('kn',this)">🇮🇳 ಕನ್ನಡ</button>
+        <button class="lb" onclick="setLang('fr',this)">🇫🇷 French</button>
+        <button class="lb" onclick="setLang('ar',this)">🇸🇦 Arabic</button>
+        <button class="lb" onclick="setLang('zh',this)">🇨🇳 Chinese</button>
+        <button class="lb" onclick="setLang('ja',this)">🇯🇵 Japanese</button>
+      </div>
+      <div class="chat-wrap" id="chatWrap">
+        <div class="welcome" id="wScreen">
+          <div class="w-orb">⚡</div>
+          <h2 id="wtitle">SAGA AI — 99% Complete</h2>
+          <p id="wsub">Streaming responses · Syntax highlighting · Math rendering · Charts · Real images · All features unlocked.</p>
+          <div class="feat-row">
+            <span class="feat">⚡ Streaming</span><span class="feat">🧮 Math (KaTeX)</span>
+            <span class="feat">🎨 Syntax Highlight</span><span class="feat">📊 Live Charts</span>
+            <span class="feat">🌐 Web Search</span><span class="feat">💻 Run Code</span>
+            <span class="feat">🎨 Real Images</span><span class="feat">📊 Excel/PPT/Word/PDF</span>
+            <span class="feat">🧠 Auto Memory</span><span class="feat">📜 Chat History</span>
+            <span class="feat">🌙 Dark/Light</span><span class="feat">🗣️ Voice AI</span>
+            <span class="feat">🌍 9 Languages</span><span class="feat">📱 Install App</span>
+            <span class="feat">💳 Payments</span><span class="feat">🎓 Student Mode</span>
+          </div>
+          <div class="sug-grid" id="sugGrid">
+            <div class="sug" onclick="qa('Search the web: What are the top AI tools launched in 2025?')">🌐 Search latest AI news</div>
+            <div class="sug" onclick="qa('Generate a real image of a futuristic city at night')">🎨 Generate real image</div>
+            <div class="sug" onclick="qa('Write Python code to sort a list and run it')">💻 Write & run Python</div>
+            <div class="sug" onclick="qa('Create a 12-month sales Excel report with charts')">📊 Create Excel file</div>
+            <div class="sug" onclick="qa('Make a 6-slide PowerPoint on Artificial Intelligence')">📑 Make PowerPoint</div>
+            <div class="sug" onclick="qa('Deep research: Everything about quantum computing — history, how it works, current state, future')">🔬 Deep research</div>
+            <div class="sug" onclick="qa('Who created you?')">👤 Who made you?</div>
+            <div class="sug" onclick="qa('Generate a GST invoice for SAGA Tech Services, Hosur for ₹25,000 + 18% GST')">🧾 GST Invoice</div>
+          </div>
+        </div>
+      </div>
+      <div class="input-dock">
+        <div class="attach-prev" id="attachPrev"></div>
+        <div class="tog-row">
+          <button class="tog" id="togS" onclick="toggleSearch()">🌐 Web</button>
+          <button class="tog" id="togM" onclick="toggleMem()">🧠 Memory</button>
+          <button class="tog" id="togD" onclick="toggleDeep()">🔬 Deep</button>
+          <button class="tog" id="togV" onclick="toggleVoiceReply()">🔊 Speak</button>
+          <button class="tog" id="togI" onclick="toggleImgGen()">🎨 Image Gen</button>
+        </div>
+        <div class="mode-strip">
+          <button class="mc sel" onclick="sm(this,'general')">⚡ General</button>
+          <button class="mc" onclick="sm(this,'code')">💻 Code</button>
+          <button class="mc" onclick="sm(this,'math')">🔢 Math</button>
+          <button class="mc" onclick="sm(this,'write')">✍️ Write</button>
+          <button class="mc" onclick="sm(this,'business')">💼 Biz</button>
+          <button class="mc" onclick="sm(this,'research')">🔬 Research</button>
+          <button class="mc" onclick="sm(this,'translate')">🌍 Translate</button>
+          <button class="mc" onclick="sm(this,'student')">🎓 Study</button>
+        </div>
+        <div class="ibox">
+          <div class="ibtns">
+            <button class="ibtn" onclick="document.getElementById('fileImg').click()" title="Image">🖼️</button>
+            <button class="ibtn" onclick="document.getElementById('filePdf').click()" title="File">📄</button>
+            <button class="ibtn" onclick="openCamera()" title="Camera">📷</button>
+            <button class="ibtn" id="micBtn" onclick="toggleVoice()" title="Voice">🎤</button>
+            <button class="ibtn" onclick="clearChat()" title="New Chat">🗑️</button>
+          </div>
+          <textarea id="inp" rows="1" placeholder="Ask anything... enable 🌐 Web for live internet · 🎨 for real images" onkeydown="hk(event)" oninput="ar(this)"></textarea>
+          <button class="sbtn" id="sendBtn" onclick="send()">↑</button>
+        </div>
+        <div class="hint" id="hintTxt">Enter to send · ⚡ Streaming · 🧮 Math · 🎨 Syntax · 📊 Charts · 🌐 Web · 🎨 Images</div>
+      </div>
+    </div>
+
+    <!-- HISTORY PANEL -->
+    <div class="panel" id="panel-history">
+      <div style="padding:13px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+        <div style="font-family:var(--fh);font-size:14px;">📜 Chat History</div>
+        <button onclick="clearAllHistory()" style="padding:5px 10px;border-radius:7px;border:1px solid var(--border2);background:transparent;color:var(--c3);font-size:11px;cursor:pointer;font-family:var(--fb);">Clear All</button>
+      </div>
+      <div class="hist-list" id="histList" style="overflow-y:auto;flex:1;"></div>
+    </div>
+
+    <!-- TOOLS PANEL -->
+    <div class="panel" id="panel-tools">
+      <div class="tgrid">
+        <div class="tc" onclick="gc('Summarize into key points: ')"><div class="tc-icon">📝</div><div class="tc-name">Summarizer</div><div class="tc-desc">Condense any document.</div><span class="tc-tag free">Free</span></div>
+        <div class="tc" onclick="gc('Translate to Tamil, Hindi, French, Japanese: ')"><div class="tc-icon">🌍</div><div class="tc-name">Translator</div><div class="tc-desc">100+ languages.</div><span class="tc-tag free">Free</span></div>
+        <div class="tc" onclick="gc('Write a professional email for: ')"><div class="tc-icon">📧</div><div class="tc-name">Email Writer</div><div class="tc-desc">Polished emails instantly.</div><span class="tc-tag free">Free</span></div>
+        <div class="tc" onclick="gc('Write and explain code for: ')"><div class="tc-icon">💻</div><div class="tc-name">Code Generator</div><div class="tc-desc">Any language explained.</div><span class="tc-tag free">Free</span></div>
+        <div class="tc" onclick="gc('Search the web and answer: ')"><div class="tc-icon">🌐</div><div class="tc-name">Web Search</div><div class="tc-desc">Real-time internet.</div><span class="tc-tag free">Free</span></div>
+        <div class="tc" onclick="gc('Generate a detailed image of: ')"><div class="tc-icon">🎨</div><div class="tc-name">Image Generator</div><div class="tc-desc">Real AI-generated images.</div><span class="tc-tag free">Free</span></div>
+        <div class="tc" onclick="sw('files',null)"><div class="tc-icon">📊</div><div class="tc-name">Excel Creator</div><div class="tc-desc">Real .xlsx downloads.</div><span class="tc-tag free">Free</span></div>
+        <div class="tc" onclick="sw('files',null)"><div class="tc-icon">📑</div><div class="tc-name">PPT Creator</div><div class="tc-desc">Real .pptx downloads.</div><span class="tc-tag free">Free</span></div>
+        <div class="tc" onclick="sw('files',null)"><div class="tc-icon">📝</div><div class="tc-name">Word Creator</div><div class="tc-desc">Real .doc downloads.</div><span class="tc-tag free">Free</span></div>
+        <div class="tc" onclick="sw('files',null)"><div class="tc-icon">📄</div><div class="tc-name">PDF Creator</div><div class="tc-desc">Real .pdf downloads.</div><span class="tc-tag free">Free</span></div>
+        <div class="tc" onclick="gc('Generate 20 MCQ questions on: ')"><div class="tc-icon">🧪</div><div class="tc-name">MCQ Generator</div><div class="tc-desc">Exam papers + answers.</div><span class="tc-tag free">Free</span></div>
+        <div class="tc" onclick="gc('Solve step by step: ')"><div class="tc-icon">🔢</div><div class="tc-name">Math Solver</div><div class="tc-desc">Full working shown.</div><span class="tc-tag free">Free</span></div>
+        <div class="tc" onclick="gc('Deep research everything about: ')"><div class="tc-icon">🔬</div><div class="tc-name">Deep Research</div><div class="tc-desc">Comprehensive analysis.</div><span class="tc-tag pro">Pro</span></div>
+        <div class="tc" onclick="gc('Create ATS resume for: ')"><div class="tc-icon">📄</div><div class="tc-name">Resume Builder</div><div class="tc-desc">Job-winning resumes.</div><span class="tc-tag free">Free</span></div>
+        <div class="tc" onclick="gc('Fix grammar and improve: ')"><div class="tc-icon">✅</div><div class="tc-name">Grammar Fix</div><div class="tc-desc">Fix errors, improve style.</div><span class="tc-tag free">Free</span></div>
+        <div class="tc" onclick="gc('Write a GST invoice for: ')"><div class="tc-icon">🧾</div><div class="tc-name">GST Invoice</div><div class="tc-desc">Professional billing.</div><span class="tc-tag free">Free</span></div>
+      </div>
+    </div>
+
+    <!-- IMAGE STUDIO -->
+    <div class="panel" id="panel-imggen">
+      <div class="imggen-panel">
+        <div class="imggen-ctrl">
+          <h3>🎨 Image Studio — Real AI Generation</h3>
+          <div class="prow"><input class="pinp" id="imgPrompt" placeholder="Describe your image in detail..."><button class="gbtn" onclick="genRealImg()">✦ Generate Image</button></div>
+          <div class="schips">
+            <button class="sc sel" onclick="ssc(this)">Photorealistic</button>
+            <button class="sc" onclick="ssc(this)">Digital Art</button>
+            <button class="sc" onclick="ssc(this)">Anime</button>
+            <button class="sc" onclick="ssc(this)">Oil Painting</button>
+            <button class="sc" onclick="ssc(this)">3D Render</button>
+            <button class="sc" onclick="ssc(this)">Watercolor</button>
+            <button class="sc" onclick="ssc(this)">Minimalist</button>
+          </div>
+          <div class="upzone" onclick="document.getElementById('fileImg').click()">🔍 Upload image to analyze with AI — click here</div>
+        </div>
+        <div class="imggen-out" id="imgOut">
+          <div class="iph" style="grid-column:1/-1;aspect-ratio:auto;padding:28px;flex-direction:row;gap:14px;">
+            <span style="font-size:24px">🎨</span>
+            <div><div style="font-size:13px;color:var(--text);font-family:var(--fh);margin-bottom:2px;">Real Image Generation</div>
+            <div style="font-size:11px;color:var(--muted2);line-height:1.6;">Uses Hugging Face's free Stable Diffusion API to generate REAL images. Add your HF token in ⚙️ Setup for full quality. Or get optimised Midjourney/DALL·E prompts without a token.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CODE RUNNER -->
+    <div class="panel" id="panel-code">
+      <div class="code-panel">
+        <div class="code-top">
+          <select class="lang-sel" id="codeLang">
+            <option value="javascript">JavaScript (Live)</option>
+            <option value="python">Python (Pyodide)</option>
+            <option value="html">HTML Preview</option>
+          </select>
+          <button class="run-btn" onclick="runCode()">▶ Run</button>
+          <button class="clear-btn" onclick="clearCode()">Clear</button>
+          <button class="ai-btn" onclick="aiWriteCode()">✦ AI Write</button>
+        </div>
+        <div class="code-body">
+          <textarea class="code-editor" id="codeEditor" spellcheck="false" placeholder="// Write or paste code here
+// Click ✦ AI Write to generate with AI
+// JavaScript runs live · Python via Pyodide · HTML previewed
+
+console.log('SAGA AI 100% — Built by Guruprasath S B');
+console.log('Hosur, Tamil Nadu, India 🇮🇳');
+
+// Try this:
+const nums = [64, 34, 25, 12, 22, 11, 90];
+const sorted = [...nums].sort((a, b) => a - b);
+console.log('Sorted:', sorted);
+console.log('Sum:', sorted.reduce((a,b)=>a+b,0));"></textarea>
+          <div class="code-out" id="codeOut"><div class="out-lbl">Output</div><div id="outContent" style="color:var(--muted2)">Click ▶ Run to execute...</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FILE CREATOR -->
+    <div class="panel" id="panel-files">
+      <div class="fc-panel">
+        <div class="fc-card">
+          <div><div class="fc-title">📊 Excel File</div><div class="fc-desc">Real .xlsx with data, tables, multiple sheets.</div></div>
+          <textarea class="fc-inp" id="xlsxP" placeholder="e.g. Monthly sales for 12 months: products, units sold, revenue, profit, growth %"></textarea>
+          <button class="fc-btn xlsx-b" onclick="createExcel(event)">📊 Generate Excel</button>
+        </div>
+        <div class="fc-card">
+          <div><div class="fc-title">📑 PowerPoint</div><div class="fc-desc">Real .pptx with slides, design, speaker notes.</div></div>
+          <textarea class="fc-inp" id="pptxP" placeholder="e.g. 6-slide presentation on Climate Change with intro, causes, effects, solutions, future"></textarea>
+          <button class="fc-btn pptx-b" onclick="createPPT(event)">📑 Generate PPT</button>
+        </div>
+        <div class="fc-card">
+          <div><div class="fc-title">📝 Word Document</div><div class="fc-desc">Formatted .doc that opens in Word / Google Docs.</div></div>
+          <textarea class="fc-inp" id="wordP" placeholder="e.g. Professional report on EV market in India with analysis and recommendations"></textarea>
+          <button class="fc-btn word-b" onclick="createWord(event)">📝 Generate Word</button>
+        </div>
+        <div class="fc-card">
+          <div><div class="fc-title">📄 PDF Document</div><div class="fc-desc">Real .pdf generated and downloaded instantly.</div></div>
+          <textarea class="fc-inp" id="pdfP" placeholder="e.g. Complete guide to Machine Learning for beginners with examples"></textarea>
+          <button class="fc-btn pdf-b" onclick="createPDF(event)">📄 Generate PDF</button>
+        </div>
+        <div class="fc-card">
+          <div><div class="fc-title">📋 CSV Data File</div><div class="fc-desc">Data files for Excel analysis.</div></div>
+          <textarea class="fc-inp" id="csvP" placeholder="e.g. Student marks for 30 students: Math, Science, English, Tamil, Social"></textarea>
+          <button class="fc-btn csv-b" onclick="createCSV(event)">📋 Generate CSV</button>
+        </div>
+        <div class="fc-card">
+          <div><div class="fc-title">🧪 MCQ Question Paper</div><div class="fc-desc">Printable exam papers with answer key.</div></div>
+          <textarea class="fc-inp" id="mcqP" placeholder="e.g. 20 MCQ on Computer Science for Class 12 with 4 options and answer key"></textarea>
+          <button class="fc-btn word-b" onclick="createMCQ(event)">🧪 Generate Paper</button>
+        </div>
+        <div class="fc-card">
+          <div><div class="fc-title">🧾 GST Invoice</div><div class="fc-desc">Professional GST billing document.</div></div>
+          <textarea class="fc-inp" id="gstP" placeholder="e.g. Invoice from SAGA Tech, Hosur to ABC Corp for software development ₹25,000 + 18% GST"></textarea>
+          <button class="fc-btn csv-b" onclick="createGST(event)">🧾 Generate Invoice</button>
+        </div>
+        <div class="fc-card">
+          <div><div class="fc-title">📖 Summary Document</div><div class="fc-desc">Formatted revision / summary PDF.</div></div>
+          <textarea class="fc-inp" id="sumP" placeholder="e.g. Complete summary of Thermodynamics for JEE exam revision"></textarea>
+          <button class="fc-btn pdf-b" onclick="createSummaryPDF(event)">📖 Generate Summary PDF</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEMORY PANEL -->
+    <div class="panel" id="panel-memory">
+      <div class="mem-panel">
+        <div style="font-family:var(--fh);font-size:15px;margin-bottom:8px;">🧠 SAGA Memory</div>
+        <p style="font-size:12px;color:var(--muted2);margin-bottom:11px;line-height:1.7;">SAGA automatically remembers key facts from your conversations. You can also add memories manually below. All memories are used in every answer when Memory is ON.</p>
+        <div class="mem-add">
+          <input class="mem-inp" id="memInp" placeholder="e.g. My name is Guruprasath. I study BE Computer Science at Hosur." onkeydown="if(event.key==='Enter')addMem()">
+          <button class="mem-add-btn" onclick="addMem()">+ Add</button>
+        </div>
+        <div id="memList"></div>
+      </div>
+    </div>
+
+    <!-- STUDENT MODE -->
+    <div class="panel" id="panel-student">
+      <div class="grid-panel">
+        <div style="font-family:var(--fh);font-size:15px;margin-bottom:4px;">🎓 Student Mode</div>
+        <p style="font-size:11px;color:var(--muted2);margin-bottom:12px;">Everything a student needs — study help, exams, assignments, Tamil explanations.</p>
+        <div class="mode-grid">
+          <div class="mcard" onclick="gc('Generate 20 MCQ with answers on: ')"><div class="mcard-icon">🧪</div><div class="mcard-name">MCQ Generator</div><div class="mcard-desc">Test papers with answer key.</div></div>
+          <div class="mcard" onclick="gc('Create flashcards for: ')"><div class="mcard-icon">📇</div><div class="mcard-name">Flashcards</div><div class="mcard-desc">Quick revision cards.</div></div>
+          <div class="mcard" onclick="gc('Solve step by step and explain: ')"><div class="mcard-icon">🔢</div><div class="mcard-name">Homework Solver</div><div class="mcard-desc">Step-by-step solutions.</div></div>
+          <div class="mcard" onclick="gc('Explain simply with examples: ')"><div class="mcard-icon">🧠</div><div class="mcard-name">Concept Explainer</div><div class="mcard-desc">Complex → simple.</div></div>
+          <div class="mcard" onclick="gc('Create 30-day study plan for: ')"><div class="mcard-icon">📅</div><div class="mcard-name">Study Planner</div><div class="mcard-desc">Exam prep schedules.</div></div>
+          <div class="mcard" onclick="gc('Write a complete essay on: ')"><div class="mcard-icon">✍️</div><div class="mcard-name">Essay Writer</div><div class="mcard-desc">Intro, body, conclusion.</div></div>
+          <div class="mcard" onclick="gc('Create revision notes for chapter: ')"><div class="mcard-icon">📋</div><div class="mcard-name">Revision Notes</div><div class="mcard-desc">Chapter summaries.</div></div>
+          <div class="mcard" onclick="gc('Predict 10 likely exam questions on: ')"><div class="mcard-icon">🎯</div><div class="mcard-name">Exam Predictor</div><div class="mcard-desc">Likely exam questions.</div></div>
+          <div class="mcard" onclick="gc('Explain in Tamil language: ')"><div class="mcard-icon">🌍</div><div class="mcard-name">Tamil Explainer</div><div class="mcard-desc">Learn in Tamil.</div></div>
+          <div class="mcard" onclick="gc('Write a project report on: ')"><div class="mcard-icon">📁</div><div class="mcard-name">Project Report</div><div class="mcard-desc">Full reports + references.</div></div>
+          <div class="mcard" onclick="gc('Create lab manual for experiment: ')"><div class="mcard-icon">🔬</div><div class="mcard-name">Lab Manual</div><div class="mcard-desc">Complete lab records.</div></div>
+          <div class="mcard" onclick="gc('Check and improve my assignment: ')"><div class="mcard-icon">✅</div><div class="mcard-name">Assignment Check</div><div class="mcard-desc">Find errors, improve.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUSINESS MODE -->
+    <div class="panel" id="panel-business">
+      <div class="grid-panel">
+        <div style="font-family:var(--fh);font-size:15px;margin-bottom:4px;">🏭 Business Mode — Hosur Edition</div>
+        <p style="font-size:11px;color:var(--muted2);margin-bottom:12px;">Built for Hosur factories, shops, startups & Tamil Nadu professionals.</p>
+        <div class="mode-grid">
+          <div class="mcard" onclick="gc('Write a GST invoice for: ')"><div class="mcard-icon">🧾</div><div class="mcard-name">GST Invoice</div><div class="mcard-desc">Professional billing.</div></div>
+          <div class="mcard" onclick="gc('Calculate GST for amount: ')"><div class="mcard-icon">🧮</div><div class="mcard-name">GST Calculator</div><div class="mcard-desc">GST breakdown.</div></div>
+          <div class="mcard" onclick="gc('Write a business letter for: ')"><div class="mcard-icon">📮</div><div class="mcard-name">Business Letter</div><div class="mcard-desc">Formal letters.</div></div>
+          <div class="mcard" onclick="gc('Create employee offer letter for: ')"><div class="mcard-icon">📋</div><div class="mcard-name">HR Letter</div><div class="mcard-desc">Offer, warning, experience.</div></div>
+          <div class="mcard" onclick="gc('Create marketing plan for: ')"><div class="mcard-icon">📈</div><div class="mcard-name">Marketing Plan</div><div class="mcard-desc">Digital + offline strategy.</div></div>
+          <div class="mcard" onclick="gc('Write business proposal for: ')"><div class="mcard-icon">💼</div><div class="mcard-name">Business Proposal</div><div class="mcard-desc">Win clients.</div></div>
+          <div class="mcard" onclick="gc('Create financial projection for: ')"><div class="mcard-icon">💰</div><div class="mcard-name">Financial Plan</div><div class="mcard-desc">Revenue projections.</div></div>
+          <div class="mcard" onclick="gc('Write job description and interview questions for: ')"><div class="mcard-icon">👥</div><div class="mcard-name">HR Tools</div><div class="mcard-desc">JD + interview questions.</div></div>
+          <div class="mcard" onclick="gc('Draft NDA or contract for: ')"><div class="mcard-icon">⚖️</div><div class="mcard-name">Legal Docs</div><div class="mcard-desc">Contracts, NDAs.</div></div>
+          <div class="mcard" onclick="gc('Create 30-day social media calendar for: ')"><div class="mcard-icon">📱</div><div class="mcard-name">Social Calendar</div><div class="mcard-desc">30-day content plan.</div></div>
+          <div class="mcard" onclick="gc('Write product description + ad copy for: ')"><div class="mcard-icon">📣</div><div class="mcard-name">Product Ads</div><div class="mcard-desc">Sell more.</div></div>
+          <div class="mcard" onclick="gc('Create startup pitch deck for: ')"><div class="mcard-icon">🚀</div><div class="mcard-name">Pitch Deck</div><div class="mcard-desc">Investor-ready pitch.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLANS -->
+    <div class="panel" id="panel-plans">
+      <div class="plans-panel">
+        <div style="font-family:var(--fh);font-size:17px;font-weight:800;margin-bottom:4px;">💳 Plans & Pricing</div>
+        <p style="font-size:11px;color:var(--muted2);margin-bottom:14px;">Choose your plan · Cancel anytime</p>
+        <div class="ub">
+          <div class="ub-lbl">Free usage today: <strong id="uCount" style="color:var(--c1)">0</strong> / 30 messages</div>
+          <div class="ub-track"><div class="ub-fill" id="uFill" style="width:0%"></div></div>
+        </div>
+        <div class="plans-grid">
+          <div class="plan-card"><div class="plan-name">🆓 Free</div><div class="plan-price">₹0</div><div class="plan-period">Forever</div><div class="plan-feats">✅ 30 msgs/day<br>✅ Basic AI chat<br>✅ 3 tools<br>❌ Web search<br>❌ Files<br>❌ Memory</div><button class="plan-btn free-b" onclick="selPlan('free')">Current Plan</button></div>
+          <div class="plan-card pop"><div class="plan-badge">⭐ POPULAR</div><div class="plan-name">🚀 Pro</div><div class="plan-price">₹199</div><div class="plan-period">per month</div><div class="plan-feats">✅ Unlimited msgs<br>✅ Web search<br>✅ All 16 tools<br>✅ Excel/PPT/Word/PDF<br>✅ Memory<br>✅ Deep research<br>✅ Real images<br>✅ Voice AI</div><button class="plan-btn pay-b" onclick="selPlan('pro')">Get Pro — ₹199/mo</button></div>
+          <div class="plan-card"><div class="plan-name">🏭 Business</div><div class="plan-price">₹999</div><div class="plan-period">per month</div><div class="plan-feats">✅ Everything in Pro<br>✅ Business Mode<br>✅ GST tools<br>✅ HR tools<br>✅ Priority support<br>✅ 5 team members<br>✅ Custom branding</div><button class="plan-btn biz-b" onclick="selPlan('business')">Get Business</button></div>
+        </div>
+        <div style="background:var(--s2);border:1px solid var(--border);border-radius:9px;padding:12px;font-size:11px;color:var(--muted2);line-height:1.8;">
+          <strong style="color:var(--c4);display:block;margin-bottom:4px;">💡 How payments work</strong>
+          1. Add Razorpay key in ⚙️ Setup<br>
+          2. Users click "Get Pro" → pay via UPI/Card/NetBanking<br>
+          3. Access unlocked automatically!<br>
+          <strong style="color:var(--c1)">100 users × ₹199 = ₹19,900/month profit!</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- POWER SUITE -->
+    <div class="panel" id="panel-prod">
+      <div class="ps-wrap">
+        <div class="ps-side">
+          <button class="pt active" onclick="spt(this,'email')">📧 Email</button>
+          <button class="pt" onclick="spt(this,'report')">📊 Report</button>
+          <button class="pt" onclick="spt(this,'script')">🎬 Script</button>
+          <button class="pt" onclick="spt(this,'proposal')">📋 Proposal</button>
+          <button class="pt" onclick="spt(this,'post')">📱 Social</button>
+          <button class="pt" onclick="spt(this,'letter')">✉️ Cover Letter</button>
+          <button class="pt" onclick="spt(this,'bio')">👤 Bio</button>
+          <button class="pt" onclick="spt(this,'pitch')">🚀 Pitch</button>
+          <button class="pt" onclick="spt(this,'contract')">⚖️ Contract</button>
+          <button class="pt" onclick="spt(this,'caption')">📸 Caption</button>
+          <button class="pt" onclick="spt(this,'ad')">📣 Ad Copy</button>
+          <button class="pt" onclick="spt(this,'lesson')">📚 Lesson</button>
+        </div>
+        <div class="ps-content" id="psContent"></div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="panel" id="panel-stats">
+      <div class="sp">
+        <div id="digestArea"></div>
+        <div class="sgrid">
+          <div class="sc2"><div class="slbl">MESSAGES</div><div class="sval" style="color:var(--c1)" id="stM">0</div><div class="ssub">This session</div></div>
+          <div class="sc2"><div class="slbl">TIME SAVED</div><div class="sval" style="color:#a78fe8" id="stT">0m</div><div class="ssub">Estimated</div></div>
+          <div class="sc2"><div class="slbl">EFFICIENCY</div><div class="sval" style="color:var(--c4)">100×</div><div class="ssub">vs manual</div></div>
+          <div class="sc2"><div class="slbl">FILES MADE</div><div class="sval" style="color:#06d6a0" id="stF">0</div><div class="ssub">Downloads</div></div>
+          <div class="sc2"><div class="slbl">TOOLS USED</div><div class="sval" style="color:var(--c1)" id="stTl">0</div><div class="ssub">Features</div></div>
+          <div class="sc2"><div class="slbl">MEMORIES</div><div class="sval" style="color:var(--c2)" id="stMm">0</div><div class="ssub">Saved</div></div>
+          <div class="sc2"><div class="slbl">CHATS SAVED</div><div class="sval" style="color:var(--c5)" id="stCh">0</div><div class="ssub">In history</div></div>
+          <div class="sc2"><div class="slbl">IMAGES GEN</div><div class="sval" style="color:#D85A30" id="stIm">0</div><div class="ssub">Created</div></div>
+        </div>
+        <div style="font-family:var(--fh);font-size:13px;margin-bottom:7px;">Recent Activity</div>
+        <div id="actList"></div>
+      </div>
+    </div>
+
+    <!-- ROADMAP -->
+    <div class="panel" id="panel-roadmap">
+      <div class="rp">
+        <div style="background:linear-gradient(135deg,rgba(0,245,196,0.07),rgba(123,94,167,0.05));border:1px solid rgba(0,245,196,0.13);border-radius:11px;padding:14px;margin-bottom:11px;">
+          <div style="font-family:var(--fh);font-size:18px;font-weight:800;margin-bottom:3px;">💰 Money Roadmap</div>
+          <div style="font-size:11px;color:var(--muted2);">For <strong style="color:var(--c1)">Guruprasath S B — Hosur, Tamil Nadu</strong></div>
+        </div>
+        <div class="rcard" style="border-left:3px solid var(--c1)"><div class="rph" style="color:var(--c1)">🚀 Phase 1 (Month 1-2) · ₹5,000/month</div><div class="rls">✦ Host FREE on netlify.com — drag & drop, live in 2 mins<br>✦ Share in WhatsApp & college groups in Hosur<br>✦ 50 free users → collect feedback → build trust</div></div>
+        <div class="rcard" style="border-left:3px solid #a78fe8"><div class="rph" style="color:#a78fe8">💼 Phase 2 (Month 3-4) · ₹20,000/month</div><div class="rls">✦ Add Razorpay → charge ₹199/month Pro plan<br>✦ 100 users × ₹199 = ₹19,900/month · API cost ≈ ₹50/user<br>✦ <strong style="color:var(--c1)">Net profit: ₹14,900/month</strong></div></div>
+        <div class="rcard" style="border-left:3px solid var(--c4)"><div class="rph" style="color:var(--c4)">📈 Phase 3 (Month 5-8) · ₹1,00,000/month</div><div class="rls">✦ Tamil interface = #1 AI for Tamil Nadu<br>✦ Business plan ₹999/month to Hosur factories<br>✦ 500 users = <strong style="color:var(--c1)">₹99,500/month</strong></div></div>
+        <div class="rcard" style="border-left:3px solid var(--c3)"><div class="rph" style="color:var(--c3)">🏆 Phase 4 (Month 9-12) · ₹5,00,000/month</div><div class="rls">✦ 500+ Hosur SEZ companies need AI tools<br>✦ ₹2,000-5,000/month per company<br>✦ Apply TIDCO / iStart TN for govt funding</div></div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
+          <a href="https://netlify.com" target="_blank" style="padding:5px 10px;border-radius:7px;border:1px solid rgba(0,245,196,0.2);color:var(--c1);font-size:11px;text-decoration:none;">🌐 Netlify</a>
+          <a href="https://razorpay.com" target="_blank" style="padding:5px 10px;border-radius:7px;border:1px solid rgba(0,245,196,0.2);color:var(--c1);font-size:11px;text-decoration:none;">💳 Razorpay</a>
+          <a href="https://console.anthropic.com" target="_blank" style="padding:5px 10px;border-radius:7px;border:1px solid rgba(0,245,196,0.2);color:var(--c1);font-size:11px;text-decoration:none;">🔑 API Key</a>
+          <a href="https://huggingface.co/settings/tokens" target="_blank" style="padding:5px 10px;border-radius:7px;border:1px solid rgba(0,245,196,0.2);color:var(--c1);font-size:11px;text-decoration:none;">🎨 HF Token</a>
+          <a href="https://tidco.com" target="_blank" style="padding:5px 10px;border-radius:7px;border:1px solid rgba(0,245,196,0.2);color:var(--c1);font-size:11px;text-decoration:none;">🏛️ TN Fund</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETUP -->
+    <div class="panel" id="panel-setup">
+      <div class="setup-panel">
+        <div class="setup-card">
+          <h4>🔑 Anthropic API Key (for AI)</h4>
+          <p>Get free from <a href="https://console.anthropic.com" target="_blank" style="color:var(--c1)">console.anthropic.com</a> → API Keys → Create Key</p>
+          <input class="api-inp" id="apiInp" placeholder="sk-ant-api03-..." type="password">
+          <button class="save-btn" onclick="saveK('saga_key','apiInp','s1')">💾 Save</button><span class="saved-msg" id="s1"></span>
+        </div>
+        <div class="setup-card">
+          <h4>🎨 Hugging Face Token (for real images)</h4>
+          <p>Get FREE from <a href="https://huggingface.co/settings/tokens" target="_blank" style="color:var(--c1)">huggingface.co/settings/tokens</a> → New token (read access)</p>
+          <input class="api-inp" id="hfInp" placeholder="hf_..." type="password">
+          <button class="save-btn" onclick="saveK('saga_hf','hfInp','s2')">💾 Save</button><span class="saved-msg" id="s2"></span>
+        </div>
+        <div class="setup-card">
+          <h4>🌐 Serper API Key (for web search)</h4>
+          <p>Get 100 free searches/month from <a href="https://serper.dev" target="_blank" style="color:var(--c1)">serper.dev</a></p>
+          <input class="api-inp" id="serperInp" placeholder="Serper key..." type="password">
+          <button class="save-btn" onclick="saveK('saga_serper','serperInp','s3')">💾 Save</button><span class="saved-msg" id="s3"></span>
+        </div>
+        <div class="setup-card">
+          <h4>💳 Razorpay Key (for payments)</h4>
+          <p>Get from <a href="https://razorpay.com" target="_blank" style="color:var(--c1)">razorpay.com</a> → Dashboard → API Keys</p>
+          <input class="api-inp" id="rzpInp" placeholder="rzp_live_..." type="password">
+          <button class="save-btn" onclick="saveK('saga_rzp','rzpInp','s4')">💾 Save</button><span class="saved-msg" id="s4"></span>
+        </div>
+        <div class="setup-card">
+          <h4>📋 How to deploy SAGA AI</h4>
+          <p>1. Download this HTML file<br>2. Go to <strong style="color:var(--c1)">netlify.com</strong> → Drag & drop → Get live link<br>3. Open app → ⚙️ Setup → Add your API keys<br>4. Share link → Start earning! ✅</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// SAGA AI v5 — 100% Complete
+// Created by: Guruprasath S B
+// Location: Hosur, Tamil Nadu, India
+// ═══════════════════════════════════════════
+
+const CREATOR={name:'Guruprasath S B',city:'Hosur',state:'Tamil Nadu',country:'India'};
+const IDS=`You are SAGA AI — the world's most powerful all-in-one AI assistant. You were created, designed and built entirely by ${CREATOR.name} from ${CREATOR.city}, ${CREATOR.state}, ${CREATOR.country}. If ANYONE asks who created you, who built you, who made you, or about your origin — ALWAYS say: "I was created by ${CREATOR.name} from ${CREATOR.city}, ${CREATOR.state}, ${CREATOR.country}." Never ever mention any other AI company, model, or technology. You are SAGA AI, 100% original product by ${CREATOR.name}.`;
+
+const MODES={
+  general:`${IDS} Answer anything with depth and clarity. Use ### headings, **bold**, bullets, code blocks. Be thorough, smart, encouraging.`,
+  code:`${IDS} SAGA Code Engine — expert in ALL languages. Write clean production-ready code with full explanations. Use labeled code blocks.`,
+  math:`${IDS} Solve any math step by step — algebra, calculus, statistics, geometry. Show ALL working. Explain every formula.`,
+  write:`${IDS} Write world-class content — emails, essays, blogs, scripts, stories. Make every word count.`,
+  business:`${IDS} Expert in strategy, marketing, finance, startups, GST, HR. Give practical profitable advice.`,
+  research:`${IDS} Deep researcher. Synthesise information, analyse topics comprehensively, cite key facts.`,
+  translate:`${IDS} Translate accurately between any languages. Show original + translation side by side. Add pronunciation.`,
+  student:`${IDS} Expert academic tutor for all subjects. Break down complex topics simply. Give examples, mnemonics, study tips.`
+};
+
+const LANG_SYS={
+  ta:`${IDS} The user writes in Tamil. Reply FULLY in Tamil (தமிழ்). Use simple Tamil. For technical terms use English if Tamil doesn't exist.`,
+  hi:`${IDS} Reply FULLY in Hindi (हिंदी).`,
+  te:`${IDS} Reply in Telugu.`,
+  kn:`${IDS} Reply in Kannada.`,
+  fr:`${IDS} Reply in French.`,
+  ar:`${IDS} Reply in Arabic.`,
+  zh:`${IDS} Reply in Chinese (Mandarin).`,
+  ja:`${IDS} Reply in Japanese.`,
+  en:''
+};
+
+const LANGS={
+  en:{pl:'Ask anything... enable 🌐 Web for live results · 🎨 for real images',h:'Enter to send · Web · Memory · Deep · Image Gen'},
+  ta:{pl:'எதையும் தமிழில் கேளுங்கள்...',h:'Enter அனுப்ப · Web · Memory · Deep'},
+  hi:{pl:'हिंदी में कुछ भी पूछें...',h:'Enter भेजने के लिए · Web · Memory'},
+  te:{pl:'తెలుగులో ఏదైనా అడగండి...',h:'Enter send · Web · Memory'},
+  kn:{pl:'ಕನ್ನಡದಲ್ಲಿ ಏನಾದರೂ ಕೇಳಿ...',h:'Enter ಕಳುಹಿಸಲು · Web · Memory'},
+  fr:{pl:"Demandez n'importe quoi...",h:'Entrée pour envoyer · Web · Mémoire'},
+  ar:{pl:'اسأل أي شيء...',h:'Enter للإرسال · بحث الويب'},
+  zh:{pl:'用中文问任何问题...',h:'按Enter发送 · 网络搜索'},
+  ja:{pl:'何でも日本語で聞いてください...',h:'Enterで送信 · ウェブ検索'}
+};
+
+// STATE
+let mode='general', curLang='en', history=[], msgCount=0, taskCount=0, fileCount=0, imgCount=0;
+let toolsUsed=new Set(), actLog=[], isLoading=false;
+let attachedImages=[], attachedFiles=[];
+let webSearchOn=false, memOn=false, deepOn=false, voiceOn=false, imgGenOn=false;
+let memories=JSON.parse(localStorage.getItem('saga_mem')||'[]');
+let chatHistories=JSON.parse(localStorage.getItem('saga_hists')||'[]');
+let apiKey=localStorage.getItem('saga_key')||'';
+let hfKey=localStorage.getItem('saga_hf')||'';
+let serperKey=localStorage.getItem('saga_serper')||'';
+let rzpKey=localStorage.getItem('saga_rzp')||'';
+let recognition=null, isRecording=false, camStream=null;
+// Reset free usage daily
+const today=new Date().toDateString();
+if(localStorage.getItem('saga_fu_date')!==today){
+  localStorage.setItem('saga_fu_date',today);
+  localStorage.setItem('saga_fu','0');
+}
+let freeUsage=parseInt(localStorage.getItem('saga_fu')||'0');
+let currentPlan=localStorage.getItem('saga_plan')||'free';
+let isDarkMode=localStorage.getItem('saga_theme')==='dark';
+let deferredPrompt=null;
+let currentChatTitle='New Chat';
+let speakingUtterance=null;
+let pyodideReady=false, pyodideLoading=false;
+
+// INIT THEME — light is default
+if(isDarkMode) document.body.classList.add('dark-mode');
+
+// PWA
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('instBanner').style.display='flex';document.getElementById('instBtn').onclick=()=>{deferredPrompt.prompt();deferredPrompt.then(r=>{if(r.outcome==='accepted')document.getElementById('instBanner').style.display='none';});deferredPrompt=null;};});
+
+// SIDEBAR MOBILE
+function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('overlay').style.display='block';}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').style.display='none';}
+
+// THEME
+function toggleTheme(){isDarkMode=!isDarkMode;document.body.classList.toggle('dark-mode',isDarkMode);localStorage.setItem('saga_theme',isDarkMode?'dark':'light');document.getElementById('themeBtn').textContent=isDarkMode?'🌞':'🌙';}
+
+// API KEYS
+function saveK(sk,id,sid){const v=document.getElementById(id).value.trim();if(sk==='saga_key')apiKey=v;else if(sk==='saga_hf')hfKey=v;else if(sk==='saga_serper')serperKey=v;else if(sk==='saga_rzp')rzpKey=v;localStorage.setItem(sk,v);const el=document.getElementById(sid);el.textContent='✓ Saved!';setTimeout(()=>el.textContent='',2000);}
+
+// LANGUAGE
+function setLang(l,btn){curLang=l;document.querySelectorAll('.lb').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.getElementById('lPill').textContent=l.toUpperCase();document.getElementById('inp').placeholder=LANGS[l]?.pl||LANGS.en.pl;document.getElementById('hintTxt').textContent=LANGS[l]?.h||LANGS.en.h;}
+
+// PANELS
+function sw(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ni').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  if(btn)btn.classList.add('active');
+  const T={chat:'💬 AI Chat',history:'📜 Chat History',tools:'🛠️ All Tools',imggen:'🎨 Image Studio',code:'💻 Code Runner',files:'📁 File Creator',memory:'🧠 Memory',student:'🎓 Student Mode',business:'🏭 Business Mode',plans:'💳 Plans',prod:'⚡ Power Suite',stats:'📊 Dashboard',roadmap:'💰 Roadmap',setup:'⚙️ Setup'};
+  document.getElementById('topTitle').textContent=T[id]||id;
+  if(id==='prod')rpt('email');if(id==='stats')uStats();if(id==='memory')renderMem();
+  if(id==='history')renderHistory();if(id==='plans')updateUB();
+  if(id==='setup'){document.getElementById('apiInp').value=apiKey;document.getElementById('hfInp').value=hfKey;document.getElementById('serperInp').value=serperKey;document.getElementById('rzpInp').value=rzpKey;}
+  closeSidebar();
+}
+function gc(pre){sw('chat',null);document.querySelector('.ni').classList.add('active');document.getElementById('inp').value=pre;document.getElementById('inp').focus();}
+function sm(btn,m){mode=m;document.querySelectorAll('.mc').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');}
+function ar(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,90)+'px';}
+function hk(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}}
+
+// TOGGLES
+function toggleSearch(){webSearchOn=!webSearchOn;const b=document.getElementById('togS');b.classList.toggle('on',webSearchOn);b.textContent=webSearchOn?'🌐 Web ON':'🌐 Web';document.getElementById('sPill').style.display=webSearchOn?'':'none';}
+function toggleMem(){memOn=!memOn;const b=document.getElementById('togM');b.classList.toggle('mem-on',memOn);b.textContent=memOn?'🧠 Mem ON':'🧠 Memory';document.getElementById('mPill').style.display=memOn?'':'none';}
+function toggleDeep(){deepOn=!deepOn;const b=document.getElementById('togD');b.classList.toggle('deep-on',deepOn);b.textContent=deepOn?'🔬 Deep ON':'🔬 Deep';}
+function toggleVoiceReply(){voiceOn=!voiceOn;const b=document.getElementById('togV');b.classList.toggle('on',voiceOn);b.textContent=voiceOn?'🔊 Speak ON':'🔊 Speak';}
+function toggleImgGen(){imgGenOn=!imgGenOn;const b=document.getElementById('togI');b.classList.toggle('on',imgGenOn);b.textContent=imgGenOn?'🎨 Image ON':'🎨 Image Gen';}
+
+// FORMAT
+function fmt(t){
+  // Code blocks with language for Prism
+  t=t.replace(/```(\w*)\n?([\s\S]*?)```/g,(_,l,c)=>{
+    const lang=l||'javascript';
+    const esc=c.replace(/</g,'&lt;').replace(/>/g,'&gt;').trim();
+    return `<div class="code-copy-wrap"><button class="code-copy-btn" onclick="copyCode(this)">Copy</button><pre class="language-${lang}"><code class="language-${lang}">${esc}</code></pre></div>`;
+  });
+  t=t.replace(/`([^`]+)`/g,'<code>$1</code>');
+  // Math display $$...$$
+  t=t.replace(/\$\$([\s\S]*?)\$\$/g,(_,m)=>`<div class="math-block" data-math="${m.replace(/"/g,'&quot;').replace(/\n/g,' ')}"></div>`);
+  // Math inline $...$
+  t=t.replace(/\$([^\$\n]{1,200})\$/g,(_,m)=>`<span class="math-inline" data-math="${m.replace(/"/g,'&quot;')}"></span>`);
+  t=t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+  t=t.replace(/^###? (.+)$/gm,'<h3>$1</h3>');
+  t=t.replace(/^[*-] (.+)$/gm,'<li>$1</li>');
+  t=t.replace(/^(\d+)\. (.+)$/gm,'<li>$2</li>');
+  t=t.replace(/(<li>[\s\S]*?<\/li>\n?)+/g,m=>`<ul>${m}</ul>`);
+  t=t.replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+  return t;
+}
+function copyCode(btn){const code=btn.nextElementSibling?.querySelector('code')?.innerText||'';navigator.clipboard.writeText(code);btn.textContent='✓';setTimeout(()=>btn.textContent='Copy',2000);}
+function applyEnhancements(el){
+  if(window.Prism){el.querySelectorAll('pre code[class*="language-"]').forEach(b=>{try{Prism.highlightElement(b);}catch(e){}});}
+  if(window.katex){
+    el.querySelectorAll('.math-block[data-math]').forEach(d=>{try{katex.render(d.dataset.math,d,{displayMode:true,throwOnError:false,output:'html'});}catch(e){d.textContent=d.dataset.math;}});
+    el.querySelectorAll('.math-inline[data-math]').forEach(s=>{try{katex.render(s.dataset.math,s,{displayMode:false,throwOnError:false,output:'html'});}catch(e){s.textContent=s.dataset.math;}});
+  }
+}
+function tryRenderChart(el,content){
+  if(!window.Chart)return;
+  const m=content.match(/CHART:\s*(\{[\s\S]*?\})\s*(?:END_CHART|$)/);
+  if(!m)return;
+  try{
+    const cfg=JSON.parse(m[1]);
+    const dark=document.body.classList.contains('dark-mode');
+    const wrap=document.createElement('div');wrap.className='chart-wrap';
+    const canvas=document.createElement('canvas');wrap.appendChild(canvas);el.appendChild(wrap);
+    cfg.options=Object.assign({responsive:true,maintainAspectRatio:true},cfg.options||{});
+    cfg.options.plugins=Object.assign({legend:{labels:{color:dark?'#9090b2':'#5a5a78',font:{size:11}}}},cfg.options.plugins||{});
+    if(cfg.type!=='pie'&&cfg.type!=='doughnut'){cfg.options.scales={x:{ticks:{color:dark?'#9090b2':'#5a5a78',font:{size:10}},grid:{color:dark?'rgba(255,255,255,0.05)':'rgba(0,0,0,0.05)'}},y:{ticks:{color:dark?'#9090b2':'#5a5a78',font:{size:10}},grid:{color:dark?'rgba(255,255,255,0.05)':'rgba(0,0,0,0.05)'}}};}
+    new Chart(canvas,cfg);
+  }catch(e){}
+}
+
+// SHARE WHATSAPP
+function shareWA(text){const p=text.replace(/\*\*/g,'').replace(/^#+\s/gm,'').replace(/`[^`]+`/g,'').slice(0,600)+'...\n\n⚡ SAGA AI — by Guruprasath S B, Hosur';window.open('https://wa.me/?text='+encodeURIComponent(p),'_blank');}
+
+// SPEAK
+function speakText(text,btn){
+  if(speakingUtterance){window.speechSynthesis.cancel();speakingUtterance=null;if(btn)btn.textContent='🔊 Speak';return false;}
+  const plain=text.replace(/#{1,3} /g,'').replace(/\*\*/g,'').replace(/`[^`]+`/g,'').replace(/```[\s\S]*?```/g,'code block').slice(0,1200);
+  const u=new SpeechSynthesisUtterance(plain);
+  const lmap={ta:'ta-IN',hi:'hi-IN',te:'te-IN',kn:'kn-IN',fr:'fr-FR',ar:'ar-SA',zh:'zh-CN',ja:'ja-JP',en:'en-IN'};
+  u.lang=lmap[curLang]||'en-IN';u.rate=0.95;
+  u.onend=()=>{speakingUtterance=null;if(btn)btn.textContent='🔊 Speak';};
+  window.speechSynthesis.speak(u);speakingUtterance=u;
+  if(btn)btn.textContent='⏹ Stop';return true;
+}
+
+// APPEND MESSAGE
+function aMsg(role,content,imgSrc,fileName,searchUsed,generatedImgUrl){
+  const w=document.getElementById('wScreen');if(w)w.remove();
+  const box=document.getElementById('chatWrap');
+  const d=document.createElement('div');d.className='msg '+role;
+  const av=document.createElement('div');av.className='av '+role;av.textContent=role==='ai'?'⚡':'👤';
+  const b=document.createElement('div');b.className='bub';
+  if(searchUsed){const st=document.createElement('div');st.className='tag-s';st.innerHTML='🌐 Web searched';b.appendChild(st);}
+  if(memOn&&role==='ai'&&memories.length){const mt=document.createElement('div');mt.className='tag-m';mt.innerHTML='🧠 Memory used';b.appendChild(mt);}
+  if(imgSrc){const im=document.createElement('img');im.src=imgSrc;im.className='img-prev';b.appendChild(im);}
+  if(fileName){const fc=document.createElement('div');fc.className='fc';fc.innerHTML=`📄 ${fileName}`;b.appendChild(fc);}
+  if(generatedImgUrl){const gi=document.createElement('img');gi.src=generatedImgUrl;gi.className='gen-img';b.appendChild(gi);}
+  if(role==='ai'){
+    const txt=document.createElement('div');txt.innerHTML=fmt(content);b.appendChild(txt);
+    // Apply syntax highlighting + math rendering
+    setTimeout(()=>{applyEnhancements(txt);tryRenderChart(b,content);},50);
+    const row=document.createElement('div');row.className='action-row';
+    const cp=document.createElement('button');cp.className='ab a-copy';cp.textContent='📋 Copy';cp.onclick=()=>{navigator.clipboard.writeText(content);cp.textContent='✓';setTimeout(()=>cp.textContent='📋 Copy',1500);};row.appendChild(cp);
+    const td=document.createElement('button');td.className='ab a-dl';td.textContent='⬇ TXT';td.onclick=()=>dlFile(content,'saga.txt','text/plain');row.appendChild(td);
+    const wd=document.createElement('button');wd.className='ab a-word';wd.textContent='⬇ Word';wd.onclick=()=>dlFile(makeDoc('SAGA AI Response',content),'saga.doc','application/msword');row.appendChild(wd);
+    const pd=document.createElement('button');pd.className='ab a-pdf';pd.textContent='⬇ PDF';pd.onclick=()=>makePDF('SAGA AI Response',content);row.appendChild(pd);
+    const hd=document.createElement('button');hd.className='ab a-html';hd.textContent='⬇ HTML';hd.onclick=()=>dlFile(makeDoc('SAGA AI Response',content),'saga.html','text/html');row.appendChild(hd);
+    const wa=document.createElement('button');wa.className='ab a-share';wa.textContent='📲 WhatsApp';wa.onclick=()=>shareWA(content);row.appendChild(wa);
+    const sp=document.createElement('button');sp.className='ab a-speak';sp.textContent='🔊 Speak';sp.onclick=()=>speakText(content,sp);row.appendChild(sp);
+    if(content.includes('```javascript')||content.includes('```js')){const rb=document.createElement('button');rb.className='ab a-run';rb.textContent='▶ Run JS';rb.onclick=()=>{const m=content.match(/```(?:javascript|js)\n?([\s\S]*?)```/);if(m){document.getElementById('codeEditor').value=m[1];sw('code',null);setTimeout(runCode,300);}};row.appendChild(rb);}
+    b.appendChild(row);
+    if(voiceOn)setTimeout(()=>speakText(content,null),400);
+    autoExtractMemory(content);
+  } else {
+    if(content){const t=document.createElement('div');t.textContent=content;b.appendChild(t);}
+  }
+  d.appendChild(av);d.appendChild(b);
+  box.appendChild(d);box.scrollTop=box.scrollHeight;
+  return b;
+}
+function showTyping(){const box=document.getElementById('chatWrap');const d=document.createElement('div');d.className='msg ai';d.id='typr';d.innerHTML=`<div class="av ai">⚡</div><div class="bub"><div class="trow"><div class="td"></div><div class="td"></div><div class="td"></div></div></div>`;box.appendChild(d);box.scrollTop=box.scrollHeight;}
+function rmTyping(){const t=document.getElementById('typr');if(t)t.remove();}
+
+// AUTO MEMORY EXTRACTION
+function autoExtractMemory(text){
+  if(!memOn) return;
+  const patterns=[/my name is ([A-Za-z ]+)/i,/i am from ([A-Za-z ,]+)/i,/i study ([A-Za-z ]+)/i,/i work at ([A-Za-z ]+)/i,/i am ([0-9]+) years old/i];
+  patterns.forEach(p=>{const m=text.match(p);if(m&&!memories.includes(m[0])){memories.push(m[0]);localStorage.setItem('saga_mem',JSON.stringify(memories));}});
+}
+
+// FREE USAGE CHECK
+function showFreeWarning(){
+  const box=document.getElementById('chatWrap');
+  const warn=document.createElement('div');
+  warn.style.cssText='background:rgba(253,203,110,0.12);border:1px solid rgba(253,203,110,0.3);border-radius:8px;padding:9px 13px;font-size:11.5px;color:#854F0B;text-align:center;margin:4px 0;';
+  warn.innerHTML='⚠️ <strong>Only 1 free message left today!</strong> &nbsp;<span style="cursor:pointer;text-decoration:underline;font-weight:600;" onclick="sw(\'plans\',null)">Upgrade to Pro ₹199/month →</span>';
+  box.appendChild(warn);
+  box.scrollTop=box.scrollHeight;
+}
+function checkUsage(){
+  if(currentPlan!=='free')return true;
+  // Reset daily
+  const today=new Date().toDateString();
+  if(localStorage.getItem('saga_fu_date')!==today){
+    localStorage.setItem('saga_fu_date',today);
+    localStorage.setItem('saga_fu','0');
+    freeUsage=0;
+  }
+  if(freeUsage>=30){
+    alert('⚠️ You have used all 5 free messages for today!\n\nYour free limit resets tomorrow at midnight.\n\n👉 Upgrade to Pro (₹199/month) for UNLIMITED messages — go to 💳 Plans & Pricing in the sidebar!');
+    return false;
+  }
+  return true;
+}
+function updateUB(){
+  const used=Math.min(freeUsage,30);
+  const remaining=Math.max(30-freeUsage,0);
+  document.getElementById('uCount').textContent=used;
+  document.getElementById('uFill').style.width=(used/30*100)+'%';
+  const lbl=document.querySelector('.ub-lbl');
+  if(lbl)lbl.innerHTML=`Free usage today: <strong id="uCount" style="color:var(--c1)">${used}</strong> / 30 messages &nbsp;·&nbsp; <span style="color:${remaining>0?'#3B6D11':'#A32D2D'}">${remaining} remaining</span>`;
+}
+
+// PAYMENT
+function selPlan(plan){
+  if(plan==='free'){alert('You are on the Free plan. 30 messages per day.');return;}
+  const prices={pro:'₹199',business:'₹999'},amounts={pro:19900,business:99900};
+  if(!rzpKey){alert(`To enable payments:\n1. Get Razorpay key from razorpay.com\n2. Add in ⚙️ Setup\n\nThen users can pay ${prices[plan]}/month!`);return;}
+  const opts={key:rzpKey,amount:amounts[plan],currency:'INR',name:'SAGA AI',description:plan+' Plan',handler:(r)=>{currentPlan=plan;localStorage.setItem('saga_plan',plan);alert('✅ Payment successful! Welcome to SAGA AI '+plan.toUpperCase()+'!');updateUB();},theme:{color:'#00f5c4'}};
+  if(window.Razorpay){new window.Razorpay(opts).open();}
+  else{const s=document.createElement('script');s.src='https://checkout.razorpay.com/v1/checkout.js';s.onload=()=>new window.Razorpay(opts).open();document.head.appendChild(s);}
+}
+
+// WEB SEARCH
+async function doSearch(q){
+  if(!serperKey)return`[Add Serper API key in ⚙️ Setup for real web results]\nAI knowledge about: ${q}`;
+  try{const r=await fetch('https://google.serper.dev/search',{method:'POST',headers:{'X-API-KEY':serperKey,'Content-Type':'application/json'},body:JSON.stringify({q,num:5})});const d=await r.json();return(d.organic||[]).slice(0,5).map(r=>`• ${r.title}: ${r.snippet}`).join('\n');}
+  catch(e){return'Web search failed. Using AI knowledge.';}
+}
+
+// REAL IMAGE GENERATION via Hugging Face
+async function generateRealImage(prompt){
+  if(!hfKey){
+    // Return null — will use prompt generation instead
+    return null;
+  }
+  try{
+    const res=await fetch('https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0',{
+      method:'POST',
+      headers:{'Authorization':`Bearer ${hfKey}`,'Content-Type':'application/json'},
+      body:JSON.stringify({inputs:prompt,parameters:{guidance_scale:7.5,num_inference_steps:25,width:512,height:512}})
+    });
+    if(!res.ok)return null;
+    const blob=await res.blob();
+    return URL.createObjectURL(blob);
+  }catch(e){return null;}
+}
+
+// MAIN SEND — with streaming support
+async function send(){
+  if(isLoading)return;
+  if(!checkUsage())return;
+  const inp=document.getElementById('inp');
+  const text=inp.value.trim();
+  if(!text&&!attachedImages.length&&!attachedFiles.length)return;
+  inp.value='';inp.style.height='auto';
+  isLoading=true;document.getElementById('sendBtn').disabled=true;
+  const dispImg=attachedImages.length?attachedImages[0].b64url:null;
+  const dispFile=attachedFiles.length?attachedFiles[0].name:null;
+  aMsg('user',text,dispImg,dispFile,false,null);
+  if(!currentChatTitle||currentChatTitle==='New Chat')currentChatTitle=text.slice(0,40)||'Chat';
+  let userContent=[];
+  attachedImages.forEach(img=>userContent.push({type:'image',source:{type:'base64',media_type:img.type,data:img.b64}}));
+  attachedFiles.forEach(f=>userContent.push({type:'text',text:`[File: ${f.name}]\n${f.content}`}));
+  let sys=MODES[mode];
+  if(LANG_SYS[curLang])sys=LANG_SYS[curLang]+'\n'+sys;
+  if(memOn&&memories.length)sys+=`\n\nUser memories (always use these):\n${memories.map(m=>`• ${m}`).join('\n')}`;
+  if(deepOn)sys+='\n\nDEEP RESEARCH MODE: Minimum 700 words. Cover history, mechanism, applications, examples, pros/cons, current state, future outlook. Be comprehensive.';
+  // Enhance system prompt for charts
+  sys+='\n\nIf the user asks for a chart or data visualization, after your explanation include a CHART: block with valid Chart.js config JSON (type, data with labels and datasets, options). Example: CHART: {"type":"bar","data":{"labels":["A","B"],"datasets":[{"label":"Values","data":[10,20],"backgroundColor":["#00f5c4","#7b5ea7"]}]}}';
+  let searchUsed=false;
+  if(webSearchOn&&text){const sr=await doSearch(text);if(sr){userContent.push({type:'text',text:`Web search results:\n${sr}`});searchUsed=true;}}
+  if(text)userContent.push({type:'text',text});
+  const fc=userContent.length===1&&userContent[0].type==='text'?userContent[0].text:userContent;
+  msgCount++;document.getElementById('mbadge').textContent=msgCount;
+  history.push({role:'user',content:fc});
+  logAct('💬',(text||'File/Image').slice(0,42));
+  attachedImages=[];attachedFiles=[];document.getElementById('attachPrev').innerHTML='';
+
+  // Try streaming first, fall back to regular if streaming not supported
+  const hasStream = apiKey; // streaming only works with direct API key
+  if(hasStream){
+    await sendStreaming(sys,searchUsed,text);
+  } else {
+    await sendRegular(sys,searchUsed,text);
+  }
+  isLoading=false;document.getElementById('sendBtn').disabled=false;inp.focus();
+}
+
+async function sendStreaming(sys,searchUsed,text){
+  // Show streaming bubble
+  const w=document.getElementById('wScreen');if(w)w.remove();
+  const box=document.getElementById('chatWrap');
+  const d=document.createElement('div');d.className='msg ai';
+  const av=document.createElement('div');av.className='av ai';av.textContent='⚡';
+  const b=document.createElement('div');b.className='bub';
+  if(searchUsed){const st=document.createElement('div');st.className='tag-s';st.innerHTML='🌐 Web searched';b.appendChild(st);}
+  if(memOn&&memories.length){const mt=document.createElement('div');mt.className='tag-m';mt.innerHTML='🧠 Memory used';b.appendChild(mt);}
+  const txtDiv=document.createElement('div');txtDiv.className='stream-cursor';b.appendChild(txtDiv);
+  d.appendChild(av);d.appendChild(b);box.appendChild(d);box.scrollTop=box.scrollHeight;
+
+  let fullReply='';
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:deepOn?4000:1500,stream:true,system:sys,messages:history})
+    });
+    if(!res.ok||!res.body){await sendRegular(sys,searchUsed,text);d.remove();return;}
+    const reader=res.body.getReader();const decoder=new TextDecoder();
+    while(true){
+      const{done,value}=await reader.read();if(done)break;
+      const chunk=decoder.decode(value);
+      const lines=chunk.split('\n');
+      for(const line of lines){
+        if(!line.startsWith('data:'))continue;
+        const data=line.slice(5).trim();if(data==='[DONE]')continue;
+        try{
+          const evt=JSON.parse(data);
+          if(evt.type==='content_block_delta'&&evt.delta?.type==='text_delta'){
+            fullReply+=evt.delta.text;
+            txtDiv.innerHTML=fmt(fullReply);
+            box.scrollTop=box.scrollHeight;
+          }
+        }catch(e){}
+      }
+    }
+    // Streaming complete — remove cursor, apply enhancements
+    txtDiv.classList.remove('stream-cursor');
+    applyEnhancements(txtDiv);
+    tryRenderChart(b,fullReply);
+    // Add action buttons
+    const row=document.createElement('div');row.className='action-row';
+    const reply=fullReply;
+    [{cls:'ab a-copy',l:'📋 Copy',fn:()=>{navigator.clipboard.writeText(reply);}},
+     {cls:'ab a-dl',l:'⬇ TXT',fn:()=>dlFile(reply,'saga.txt','text/plain')},
+     {cls:'ab a-word',l:'⬇ Word',fn:()=>dlFile(makeDoc('SAGA AI Response',reply),'saga.doc','application/msword')},
+     {cls:'ab a-pdf',l:'⬇ PDF',fn:()=>makePDF('SAGA AI Response',reply)},
+     {cls:'ab a-share',l:'📲 WhatsApp',fn:()=>shareWA(reply)},
+     {cls:'ab a-speak',l:'🔊 Speak',fn:null}
+    ].forEach(bt=>{
+      const btn=document.createElement('button');btn.className=bt.cls;btn.textContent=bt.l;
+      if(bt.l==='🔊 Speak'){btn.onclick=()=>speakText(reply,btn);}
+      else{btn.onclick=()=>{bt.fn();if(bt.l==='📋 Copy'){btn.textContent='✓';setTimeout(()=>btn.textContent='📋 Copy',1500);}};}
+      row.appendChild(btn);
+    });
+    if(reply.includes('```javascript')||reply.includes('```js')){
+      const rb=document.createElement('button');rb.className='ab a-run';rb.textContent='▶ Run JS';
+      rb.onclick=()=>{const m=reply.match(/```(?:javascript|js)\n?([\s\S]*?)```/);if(m){document.getElementById('codeEditor').value=m[1];sw('code',null);setTimeout(runCode,300);}};
+      row.appendChild(rb);
+    }
+    b.appendChild(row);
+    history.push({role:'assistant',content:fullReply});
+    if(voiceOn)setTimeout(()=>speakText(fullReply,null),400);
+    autoExtractMemory(fullReply);
+  }catch(e){
+    // Fallback to regular if streaming fails
+    d.remove();
+    await sendRegular(sys,searchUsed,text);
+    return;
+  }
+  msgCount++;taskCount++;
+  document.getElementById('mbadge').textContent=msgCount;
+  toolsUsed.add('chat_'+mode);
+  if(currentPlan==='free'){freeUsage++;localStorage.setItem('saga_fu',freeUsage);localStorage.setItem('saga_fu_date',new Date().toDateString());if(freeUsage===28)showFreeWarning();}
+  // Image gen
+  if(imgGenOn&&text&&(text.toLowerCase().includes('generate')||text.toLowerCase().includes('create image')||text.toLowerCase().includes('draw')||text.toLowerCase().includes('image of'))){
+    const imgPromptMatch=fullReply.match(/(?:prompt|generate|create).*?[:：]\s*["']?([^"'\n]{20,200})/i);
+    const imgPrompt=imgPromptMatch?imgPromptMatch[1]:text;
+    const imgUrl=await generateRealImage(imgPrompt);
+    if(imgUrl){const gi=document.createElement('img');gi.src=imgUrl;gi.className='gen-img';b.insertBefore(gi,b.querySelector('.action-row'));imgCount++;}
+  }
+  saveChatToHistory();
+}
+
+async function sendRegular(sys,searchUsed,text){
+  showTyping();
+  try{
+    const headers={'Content-Type':'application/json'};
+    if(apiKey){headers['x-api-key']=apiKey;headers['anthropic-version']='2023-06-01';}
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers,body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:deepOn?4000:1500,system:sys,messages:history})});
+    const data=await res.json();rmTyping();
+    const reply=data.content?.[0]?.text||'Sorry, something went wrong. Please try again.';
+    history.push({role:'assistant',content:reply});
+    let genImgUrl=null;
+    if(imgGenOn&&text&&(text.toLowerCase().includes('generate')||text.toLowerCase().includes('create image')||text.toLowerCase().includes('draw')||text.toLowerCase().includes('image of'))){
+      const imgPromptMatch=reply.match(/(?:prompt|generate|create).*?[:：]\s*["']?([^"'\n]{20,200})/i);
+      const imgPrompt=imgPromptMatch?imgPromptMatch[1]:text;
+      genImgUrl=await generateRealImage(imgPrompt);
+      if(genImgUrl)imgCount++;
+    }
+    aMsg('ai',reply,null,null,searchUsed,genImgUrl);
+    msgCount++;taskCount++;
+    document.getElementById('mbadge').textContent=msgCount;
+    toolsUsed.add('chat_'+mode);
+    if(currentPlan==='free'){freeUsage++;localStorage.setItem('saga_fu',freeUsage);localStorage.setItem('saga_fu_date',new Date().toDateString());if(freeUsage===28)showFreeWarning();}
+    saveChatToHistory();
+  }catch(e){rmTyping();aMsg('ai','⚠️ Connection error. Add your API key in ⚙️ Setup to use SAGA AI outside Claude.ai.');}
+}
+function qa(t){document.getElementById('inp').value=t;send();}
+
+// CHAT HISTORY
+function saveChatToHistory(){
+  if(history.length<2)return;
+  const existing=chatHistories.findIndex(c=>c.title===currentChatTitle);
+  const chatData={title:currentChatTitle,time:new Date().toLocaleString(),messages:history.slice(-20),preview:(history[history.length-1]?.content||'').slice(0,80)};
+  if(existing>=0)chatHistories[existing]=chatData;
+  else chatHistories.unshift(chatData);
+  if(chatHistories.length>50)chatHistories=chatHistories.slice(0,50);
+  localStorage.setItem('saga_hists',JSON.stringify(chatHistories));
+}
+function renderHistory(){
+  const list=document.getElementById('histList');
+  if(!chatHistories.length){list.innerHTML=`<div style="font-size:12px;color:var(--muted2);padding:16px;">No saved chats yet. Start chatting and your conversations will be saved here automatically!</div>`;return;}
+  list.innerHTML=chatHistories.map((c,i)=>`<div class="hist-item" onclick="loadChat(${i})">
+    <button class="hist-del" onclick="event.stopPropagation();deleteChat(${i})">🗑️</button>
+    <div class="hist-title">${c.title}</div>
+    <div class="hist-preview">${c.preview||'...'}</div>
+    <div class="hist-time">📅 ${c.time}</div>
+  </div>`).join('');
+}
+function loadChat(i){
+  const chat=chatHistories[i];if(!chat)return;
+  history=chat.messages||[];currentChatTitle=chat.title;
+  const box=document.getElementById('chatWrap');box.innerHTML='';
+  history.forEach((msg,idx)=>{if(idx%2===0&&msg.role==='user')aMsg('user',typeof msg.content==='string'?msg.content:msg.content.find?msg.content.find(c=>c.type==='text')?.text||'[File/Image]':'',null,null,false,null);else if(msg.role==='assistant')aMsg('ai',msg.content,null,null,false,null);});
+  sw('chat',null);document.querySelector('.ni').classList.add('active');
+}
+function deleteChat(i){chatHistories.splice(i,1);localStorage.setItem('saga_hists',JSON.stringify(chatHistories));renderHistory();}
+function clearAllHistory(){if(confirm('Delete all chat history?')){chatHistories=[];localStorage.setItem('saga_hists','[]');renderHistory();}}
+function clearChat(){
+  saveChatToHistory();
+  history=[];currentChatTitle='New Chat';
+  const cw=document.getElementById('chatWrap');cw.innerHTML='';
+  const w=document.createElement('div');w.className='welcome';w.id='wScreen';
+  w.innerHTML=`<div class="w-orb">⚡</div><h2>New Conversation</h2><p>Your previous chat was saved in 📜 Chat History</p>`;
+  cw.appendChild(w);
+}
+
+// FILE HANDLING
+function handleImg(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{const b64url=ev.target.result;attachedImages.push({b64url,b64:b64url.split(',')[1],type:f.type,name:f.name});renderPrev();sw('chat',null);document.querySelector('.ni').classList.add('active');};r.readAsDataURL(f);e.target.value='';}
+function handleFile(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{attachedFiles.push({name:f.name,content:ev.target.result.slice(0,8000)});renderPrev();sw('chat',null);document.querySelector('.ni').classList.add('active');};r.readAsText(f);e.target.value='';}
+function renderPrev(){const p=document.getElementById('attachPrev');p.innerHTML='';attachedImages.forEach((img,i)=>{const d=document.createElement('div');d.className='att-item';d.innerHTML=`<img src="${img.b64url}" class="att-img"><span>${img.name.slice(0,12)}</span><button class="att-rm" onclick="rmImg(${i})">✕</button>`;p.appendChild(d);});attachedFiles.forEach((f,i)=>{const d=document.createElement('div');d.className='att-item';d.innerHTML=`📄 ${f.name.slice(0,12)}<button class="att-rm" onclick="rmFile(${i})">✕</button>`;p.appendChild(d);});}
+function rmImg(i){attachedImages.splice(i,1);renderPrev();}
+function rmFile(i){attachedFiles.splice(i,1);renderPrev();}
+
+// CAMERA
+async function openCamera(){try{camStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});document.getElementById('camVideo').srcObject=camStream;document.getElementById('camModal').classList.add('open');}catch(e){alert('Camera permission denied.');}}
+function closeCamera(){if(camStream){camStream.getTracks().forEach(t=>t.stop());camStream=null;}document.getElementById('camModal').classList.remove('open');}
+function snapPhoto(){const v=document.getElementById('camVideo'),c=document.getElementById('camCanvas');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);const b64url=c.toDataURL('image/jpeg',0.85);attachedImages.push({b64url,b64:b64url.split(',')[1],type:'image/jpeg',name:'photo.jpg'});renderPrev();closeCamera();sw('chat',null);document.querySelector('.ni').classList.add('active');}
+
+// VOICE
+function toggleVoice(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){alert('Voice needs Chrome browser.');return;}
+  if(isRecording){recognition.stop();return;}
+  recognition=new SR();
+  const lmap={ta:'ta-IN',hi:'hi-IN',te:'te-IN',kn:'kn-IN',fr:'fr-FR',ar:'ar-SA',zh:'zh-CN',ja:'ja-JP',en:'en-IN'};
+  recognition.lang=lmap[curLang]||'en-IN';recognition.continuous=false;recognition.interimResults=false;
+  recognition.onstart=()=>{isRecording=true;document.getElementById('micBtn').classList.add('recording');const vt=document.getElementById('vtoast');const vtx=document.getElementById('vtxt');vtx.textContent=curLang==='ta'?'கேட்கிறேன்...':curLang==='hi'?'सुन रहा हूं...':'Listening...';vt.classList.add('show');};
+  recognition.onresult=e=>{const t=e.results[0][0].transcript;document.getElementById('inp').value+=t;ar(document.getElementById('inp'));};
+  recognition.onend=()=>{isRecording=false;document.getElementById('micBtn').classList.remove('recording');document.getElementById('vtoast').classList.remove('show');recognition=null;};
+  recognition.onerror=()=>{isRecording=false;document.getElementById('micBtn').classList.remove('recording');document.getElementById('vtoast').classList.remove('show');recognition=null;};
+  recognition.start();
+}
+
+// IMAGE STUDIO
+function ssc(btn){document.querySelectorAll('.sc').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');}
+async function genRealImg(){
+  const prompt=document.getElementById('imgPrompt').value.trim();
+  if(!prompt){alert('Enter a description!');return;}
+  const style=document.querySelector('.sc.sel')?.textContent||'Photorealistic';
+  const out=document.getElementById('imgOut');
+  out.innerHTML=`<div class="iph loading" style="grid-column:1/-1;aspect-ratio:auto;padding:26px;flex-direction:row;gap:12px;"><span style="font-size:20px">✦</span><div style="font-size:12px">${hfKey?'Generating real image via AI...':'Generating optimised prompts...'}</div></div>`;
+  
+  if(hfKey){
+    // Real image generation
+    const fullPrompt=`${style} style: ${prompt}, high quality, detailed, 4k`;
+    const imgUrl=await generateRealImage(fullPrompt);
+    if(imgUrl){
+      out.innerHTML='';
+      const card=document.createElement('div');card.className='real-img-card';
+      card.innerHTML=`<img src="${imgUrl}" alt="${prompt}" style="width:100%;display:block;border-radius:10px;">
+        <div class="img-info">
+          <div style="font-size:11px;color:var(--c1);font-family:var(--fh);margin-bottom:4px;">${style}</div>
+          <div style="font-size:10px;color:var(--muted2);">${prompt.slice(0,60)}</div>
+          <a href="${imgUrl}" download="saga-image.png" style="display:inline-block;margin-top:7px;padding:4px 10px;border-radius:6px;border:1px solid rgba(0,245,196,0.2);color:var(--c1);font-size:10px;text-decoration:none;">⬇ Download</a>
+        </div>`;
+      out.appendChild(card);
+      imgCount++;logAct('🎨','Real image: '+prompt.slice(0,25));taskCount++;return;
+    }
+  }
+  
+  // Fallback: generate prompts
+  try{
+    const h={'Content-Type':'application/json'};if(apiKey){h['x-api-key']=apiKey;h['anthropic-version']='2023-06-01';}
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:h,body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:'Return ONLY valid JSON array: [{title,prompt,negative,tips}]',messages:[{role:'user',content:`3 ${style} image prompts for: ${prompt}`}]})});
+    const data=await res.json();
+    const ideas=JSON.parse((data.content?.[0]?.text||'[]').replace(/```json|```/g,'').trim());
+    out.innerHTML=`<div style="grid-column:1/-1;font-size:11px;color:var(--c4);padding:8px 0;">💡 Add Hugging Face token in ⚙️ Setup for REAL image generation. Below are optimised prompts for Midjourney/DALL·E:</div>`;
+    ideas.forEach(idea=>{const c=document.createElement('div');c.style.cssText='background:var(--s1);border:1px solid var(--border);border-radius:9px;padding:12px;';c.innerHTML=`<div style="font-family:var(--fh);font-size:12px;color:var(--c1);margin-bottom:5px;">${idea.title}</div><div style="font-size:10.5px;color:var(--muted2);font-family:var(--fm);line-height:1.6;margin-bottom:5px;">${idea.prompt}</div>${idea.negative?`<div style="font-size:10px;color:var(--muted);">❌ ${idea.negative}</div>`:''}<button onclick="navigator.clipboard.writeText(this.dataset.p).then(()=>{this.textContent='✓';setTimeout(()=>this.textContent='Copy',1500)})" data-p="${(idea.prompt||'').replace(/"/g,'&quot;')}" style="margin-top:7px;padding:3px 8px;border-radius:5px;border:1px solid rgba(0,245,196,0.2);background:transparent;color:var(--c1);font-size:10px;cursor:pointer;">Copy</button>`;out.appendChild(c);});
+    logAct('🎨','Image prompts: '+prompt.slice(0,22));taskCount++;
+  }catch(e){out.innerHTML=`<div class="iph" style="grid-column:1/-1;padding:22px;aspect-ratio:auto;"><span>⚠️</span><div>Error. Add API key in Setup.</div></div>`;}
+}
+
+// CODE RUNNER
+async function loadPyodide(){
+  if(pyodideReady||pyodideLoading)return;
+  pyodideLoading=true;
+  document.getElementById('outContent').textContent='Loading Python (Pyodide)... please wait ~10s';
+  const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js';
+  s.onload=async()=>{window.pyodideInstance=await window.loadPyodide();pyodideReady=true;pyodideLoading=false;document.getElementById('outContent').textContent='✓ Python ready! Click ▶ Run';};
+  document.head.appendChild(s);
+}
+function runCode(){
+  const lang=document.getElementById('codeLang').value;
+  const code=document.getElementById('codeEditor').value;
+  const out=document.getElementById('outContent');
+  if(lang==='javascript'){
+    const logs=[];const ol=console.log,oe=console.error,ow=console.warn;
+    console.log=(...a)=>logs.push(a.map(x=>typeof x==='object'?JSON.stringify(x,null,2):String(x)).join(' '));
+    console.error=(...a)=>logs.push('❌ '+a.join(' '));
+    console.warn=(...a)=>logs.push('⚠️ '+a.join(' '));
+    try{eval(code);out.style.color='#a8ff78';out.textContent=logs.length?logs.join('\n'):'✓ Executed — no output';}
+    catch(e){out.style.color='#ff6b6b';out.textContent='Error: '+e.message;}
+    console.log=ol;console.error=oe;console.warn=ow;
+  } else if(lang==='python'){
+    if(!pyodideReady){loadPyodide();return;}
+    const outputs=[];
+    window.pyodideInstance.globals.set('print',(...a)=>outputs.push(a.join(' ')));
+    try{window.pyodideInstance.runPython(code);out.style.color='#a8ff78';out.textContent=outputs.length?outputs.join('\n'):'✓ Executed — no output';}
+    catch(e){out.style.color='#ff6b6b';out.textContent='Python Error: '+e.message;}
+  } else {
+    const w=window.open('','_blank','width=900,height=650');w.document.write(code);w.document.close();
+    out.style.color='#a8ff78';out.textContent='✓ HTML opened in new window';
+  }
+  logAct('💻','Ran '+lang+' code');toolsUsed.add('code');taskCount++;
+}
+document.getElementById('codeLang').addEventListener('change',function(){if(this.value==='python'&&!pyodideReady)loadPyodide();});
+function clearCode(){document.getElementById('codeEditor').value='';document.getElementById('outContent').textContent='Click ▶ Run to execute...';document.getElementById('outContent').style.color='var(--muted2)';}
+async function aiWriteCode(){
+  const lang=document.getElementById('codeLang').value;
+  const task=prompt(`What ${lang} code should SAGA write?`);if(!task)return;
+  document.getElementById('codeEditor').value='// Generating...';
+  try{
+    const h={'Content-Type':'application/json'};if(apiKey){h['x-api-key']=apiKey;h['anthropic-version']='2023-06-01';}
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:h,body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:`${IDS} Write only ${lang} code. No markdown, no backticks, no explanation.`,messages:[{role:'user',content:`Write ${lang} code to: ${task}`}]})});
+    const data=await r.json();
+    document.getElementById('codeEditor').value=(data.content?.[0]?.text||'// Error').replace(/```\w*\n?/g,'').replace(/```/g,'').trim();
+    logAct('💻','AI wrote: '+task.slice(0,30));
+  }catch(e){document.getElementById('codeEditor').value='// Error. Add API key in Setup.';}
+}
+
+// AI CONTENT HELPER
+async function getAI(prompt,sys){
+  const h={'Content-Type':'application/json'};if(apiKey){h['x-api-key']=apiKey;h['anthropic-version']='2023-06-01';}
+  const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:h,body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,system:sys||IDS,messages:[{role:'user',content:prompt}]})});
+  const d=await r.json();return d.content?.[0]?.text||'';
+}
+
+// FILE CREATORS
+async function createExcel(e){
+  const p=document.getElementById('xlsxP').value.trim();if(!p){alert('Describe your data!');return;}
+  const btn=e.target;btn.textContent='⏳ Generating...';btn.disabled=true;
+  try{
+    const raw=await getAI(`Create data for: ${p}. Return ONLY JSON: {title:"...",headers:[...],rows:[[...],...]}.  12+ rows.`,`${IDS} Return only valid JSON.`);
+    const obj=JSON.parse(raw.replace(/```json|```/g,'').trim());
+    const wb=XLSX.utils.book_new();
+    const ws=XLSX.utils.aoa_to_sheet([obj.headers,...obj.rows]);
+    ws['!cols']=obj.headers.map(()=>({wch:18}));
+    XLSX.utils.book_append_sheet(wb,ws,obj.title||'Data');
+    XLSX.writeFile(wb,'SAGA-'+obj.title+'.xlsx');
+    fileCount++;logAct('📊','Excel: '+obj.title);taskCount++;
+    btn.textContent='✅ Downloaded!';setTimeout(()=>{btn.textContent='📊 Generate Excel';btn.disabled=false;},3000);
+  }catch(er){btn.textContent='📊 Generate Excel';btn.disabled=false;alert('Error. Simplify your request.');}
+}
+async function createPPT(e){
+  const p=document.getElementById('pptxP').value.trim();if(!p){alert('Describe your presentation!');return;}
+  const btn=e.target;btn.textContent='⏳ Generating...';btn.disabled=true;
+  try{
+    const raw=await getAI(`Create PPT for: ${p}. Return ONLY JSON: {title:"...",slides:[{title:"...",points:["...","...","..."],notes:"..."},...]}. 6-8 slides.`,`${IDS} Return only valid JSON.`);
+    const obj=JSON.parse(raw.replace(/```json|```/g,'').trim());
+    const pptx=new PptxGenJS();
+    const ts=pptx.addSlide();ts.background={color:'040406'};
+    ts.addText(obj.title,{x:.5,y:1.8,w:9,h:1.2,fontSize:34,bold:true,color:'00F5C4',align:'center',fontFace:'Arial'});
+    ts.addText('Created by SAGA AI · '+CREATOR.name+' · '+CREATOR.city,{x:.5,y:3.5,w:9,h:.5,fontSize:12,color:'9090B2',align:'center'});
+    obj.slides.forEach(sl=>{
+      const s=pptx.addSlide();s.background={color:'0C0C14'};
+      s.addShape(pptx.ShapeType.rect,{x:0,y:0,w:10,h:.06,fill:{color:'00F5C4'}});
+      s.addText(sl.title,{x:.3,y:.2,w:9.4,h:.75,fontSize:22,bold:true,color:'00F5C4',fontFace:'Arial'});
+      s.addText(sl.points.map(pt=>'• '+pt).join('\n'),{x:.4,y:1.1,w:9.2,h:3.8,fontSize:14,color:'EEEEF5',fontFace:'Arial',valign:'top',lineSpacingMultiple:1.4});
+      if(sl.notes)s.addNotes(sl.notes);
+    });
+    await pptx.writeFile({fileName:'SAGA-'+obj.title+'.pptx'});
+    fileCount++;logAct('📑','PPT: '+obj.title);taskCount++;
+    btn.textContent='✅ Downloaded!';setTimeout(()=>{btn.textContent='📑 Generate PPT';btn.disabled=false;},3000);
+  }catch(er){btn.textContent='📑 Generate PPT';btn.disabled=false;alert('Error creating PPT.');}
+}
+async function createWord(e){
+  const p=document.getElementById('wordP').value.trim();if(!p){alert('Describe your document!');return;}
+  const btn=e.target;btn.textContent='⏳ Generating...';btn.disabled=true;
+  try{
+    const content=await getAI(`Write a detailed professional document on: ${p}. Use ## headings, **bold**, bullet points. Be comprehensive.`);
+    dlFile(makeDoc(p,content),'SAGA-'+p.slice(0,20)+'.doc','application/msword');
+    fileCount++;logAct('📝','Word: '+p.slice(0,22));taskCount++;
+    btn.textContent='✅ Downloaded!';setTimeout(()=>{btn.textContent='📝 Generate Word';btn.disabled=false;},3000);
+  }catch(er){btn.textContent='📝 Generate Word';btn.disabled=false;alert('Error.');}
+}
+async function createPDF(e){
+  const p=document.getElementById('pdfP').value.trim();if(!p){alert('Describe your PDF!');return;}
+  const btn=e.target;btn.textContent='⏳ Generating...';btn.disabled=true;
+  try{
+    const content=await getAI(`Write a comprehensive document on: ${p}. Use clear headings, bullet points, bold key terms. Be thorough.`);
+    makePDF(p,content);
+    fileCount++;logAct('📄','PDF: '+p.slice(0,22));taskCount++;
+    btn.textContent='✅ Downloaded!';setTimeout(()=>{btn.textContent='📄 Generate PDF';btn.disabled=false;},3000);
+  }catch(er){btn.textContent='📄 Generate PDF';btn.disabled=false;alert('Error.');}
+}
+async function createCSV(e){
+  const p=document.getElementById('csvP').value.trim();if(!p){alert('Describe your data!');return;}
+  const btn=e.target;btn.textContent='⏳ Generating...';btn.disabled=true;
+  try{
+    const raw=await getAI(`Create CSV for: ${p}. Return ONLY raw CSV with headers row 1. 15+ rows.`,`${IDS} Return only raw CSV.`);
+    dlFile(raw,'SAGA-Data.csv','text/csv');
+    fileCount++;logAct('📋','CSV: '+p.slice(0,22));taskCount++;
+    btn.textContent='✅ Downloaded!';setTimeout(()=>{btn.textContent='📋 Generate CSV';btn.disabled=false;},3000);
+  }catch(er){btn.textContent='📋 Generate CSV';btn.disabled=false;alert('Error.');}
+}
+async function createMCQ(e){
+  const p=document.getElementById('mcqP').value.trim();if(!p){alert('Describe your paper!');return;}
+  const btn=e.target;btn.textContent='⏳ Generating...';btn.disabled=true;
+  try{
+    const content=await getAI(`Create MCQ paper: ${p}. Format: Q1. [Question]\na) b) c) d)\nAnswer: [x]\n\nInclude ANSWER KEY at end.`);
+    makePDF('MCQ Paper: '+p,content);
+    fileCount++;logAct('🧪','MCQ: '+p.slice(0,22));taskCount++;
+    btn.textContent='✅ Downloaded!';setTimeout(()=>{btn.textContent='🧪 Generate Paper';btn.disabled=false;},3000);
+  }catch(er){btn.textContent='🧪 Generate Paper';btn.disabled=false;alert('Error.');}
+}
+async function createGST(e){
+  const p=document.getElementById('gstP').value.trim();if(!p){alert('Describe your invoice!');return;}
+  const btn=e.target;btn.textContent='⏳ Generating...';btn.disabled=true;
+  try{
+    const raw=await getAI(`Create GST invoice for: ${p}. Return ONLY JSON: {invoiceNo:"INV-001",date:"today",from:{name,address,gstin},to:{name,address,gstin},items:[{desc,qty,rate,amount}],subtotal:0,gst18:0,total:0,notes:""}`,`${IDS} Return only JSON.`);
+    const inv=JSON.parse(raw.replace(/```json|```/g,'').trim());
+    const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>GST Invoice</title>
+    <style>body{font-family:Arial,sans-serif;max-width:720px;margin:20px auto;padding:20px;color:#1a1a1a;}
+    h1{color:#00875a;text-align:center;margin-bottom:5px;}.sub{text-align:center;font-size:12px;color:#888;margin-bottom:20px;}
+    .header{display:flex;justify-content:space-between;margin-bottom:18px;gap:20px;}
+    table{width:100%;border-collapse:collapse;margin:15px 0;}th{background:#1565c0;color:white;padding:8px;}td{padding:6px;border-bottom:1px solid #ddd;}
+    .totrow{font-weight:bold;background:#e8f5e9;}.footer{text-align:center;margin-top:18px;font-size:11px;color:#888;}
+    .badge{background:#00875a;color:white;padding:2px 8px;border-radius:4px;font-size:11px;}</style></head>
+    <body><h1>TAX INVOICE <span class="badge">GST</span></h1>
+    <div class="sub">Invoice: ${inv.invoiceNo} | Date: ${inv.date}</div>
+    <div class="header">
+      <div><strong>From:</strong><br>${inv.from?.name||''}<br>${inv.from?.address||''}<br>GSTIN: ${inv.from?.gstin||'N/A'}</div>
+      <div><strong>To:</strong><br>${inv.to?.name||''}<br>${inv.to?.address||''}<br>GSTIN: ${inv.to?.gstin||'N/A'}</div>
+    </div>
+    <table><tr><th>#</th><th>Description</th><th>Qty</th><th>Rate (₹)</th><th>Amount (₹)</th></tr>
+    ${(inv.items||[]).map((it,i)=>`<tr><td>${i+1}</td><td>${it.desc}</td><td>${it.qty}</td><td>${it.rate}</td><td>${it.amount}</td></tr>`).join('')}
+    <tr><td colspan="4" align="right"><strong>Subtotal</strong></td><td><strong>₹${inv.subtotal}</strong></td></tr>
+    <tr><td colspan="4" align="right">GST @18%</td><td>₹${inv.gst18}</td></tr>
+    <tr class="totrow"><td colspan="4" align="right">TOTAL</td><td>₹${inv.total}</td></tr></table>
+    <p>${inv.notes||'Thank you for your business!'}</p>
+    <div class="footer">SAGA AI · Created by ${CREATOR.name} · ${CREATOR.city}, ${CREATOR.state}</div></body></html>`;
+    dlFile(html,'SAGA-GST-Invoice.html','text/html');
+    fileCount++;logAct('🧾','GST Invoice');taskCount++;
+    btn.textContent='✅ Downloaded!';setTimeout(()=>{btn.textContent='🧾 Generate Invoice';btn.disabled=false;},3000);
+  }catch(er){btn.textContent='🧾 Generate Invoice';btn.disabled=false;alert('Error.');}
+}
+async function createSummaryPDF(e){
+  const p=document.getElementById('sumP').value.trim();if(!p){alert('Describe what to summarize!');return;}
+  const btn=e.target;btn.textContent='⏳ Generating...';btn.disabled=true;
+  try{
+    const content=await getAI(`Create a comprehensive well-organized summary/revision document for: ${p}. Include key concepts, definitions, examples, formulas, important points, and quick revision tips. Format nicely with headings and bullet points.`);
+    makePDF('Summary: '+p,content);
+    fileCount++;logAct('📖','Summary PDF: '+p.slice(0,22));taskCount++;
+    btn.textContent='✅ Downloaded!';setTimeout(()=>{btn.textContent='📖 Generate Summary PDF';btn.disabled=false;},3000);
+  }catch(er){btn.textContent='📖 Generate Summary PDF';btn.disabled=false;alert('Error.');}
+}
+
+// PDF GENERATION (jsPDF)
+function makePDF(title,content){
+  if(typeof jsPDF==='undefined'&&typeof window.jspdf?.jsPDF==='undefined'){alert('PDF library loading. Try again in 2 seconds.');return;}
+  const {jsPDF:J}=window.jspdf||{jsPDF:window.jsPDF};
+  const doc=new J({unit:'mm',format:'a4'});
+  const W=doc.internal.pageSize.getWidth()-20;
+  doc.setFontSize(16);doc.setFont('helvetica','bold');doc.setTextColor(0,135,90);
+  doc.text(title.slice(0,60),10,15);
+  doc.setFontSize(9);doc.setTextColor(150,150,150);
+  doc.text('Generated by SAGA AI · '+CREATOR.name+' · '+CREATOR.city+', '+CREATOR.state,10,22);
+  doc.setDrawColor(0,135,90);doc.setLineWidth(0.5);doc.line(10,24,200,24);
+  let y=32;doc.setTextColor(30,30,30);
+  const plain=content.replace(/#{1,3} (.*)/g,'$1').replace(/\*\*(.*?)\*\*/g,'$1').replace(/`[^`]+`/g,'').replace(/```[\s\S]*?```/g,'[code]');
+  const lines=plain.split('\n');
+  lines.forEach(line=>{
+    if(y>275){doc.addPage();y=15;}
+    const trimmed=line.trim();
+    if(!trimmed){y+=3;return;}
+    if(line.match(/^#{1,3} /)){doc.setFont('helvetica','bold');doc.setFontSize(12);doc.setTextColor(21,101,192);}
+    else if(line.startsWith('• ')||line.startsWith('- ')||line.startsWith('* ')){doc.setFont('helvetica','normal');doc.setFontSize(10);doc.setTextColor(30,30,30);}
+    else{doc.setFont('helvetica','normal');doc.setFontSize(10);doc.setTextColor(30,30,30);}
+    const wrapped=doc.splitTextToSize(trimmed,W);
+    doc.text(wrapped,10,y);
+    y+=wrapped.length*5+1;
+  });
+  doc.save('SAGA-'+title.slice(0,20).replace(/[^a-zA-Z0-9]/g,'_')+'.pdf');
+  fileCount++;
+}
+
+// WORD/HTML DOC
+function makeDoc(title,content){
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${title}</title>
+  <style>body{font-family:'Calibri',Arial,sans-serif;max-width:820px;margin:30px auto;padding:28px;color:#1a1a1a;line-height:1.8;font-size:13pt;}
+  h1{color:#00875a;font-size:18pt;border-bottom:2.5px solid #00875a;padding-bottom:7px;margin-bottom:16px;}
+  h2,h3{color:#1565c0;margin-top:14px;}strong{color:#1565c0;}
+  pre{background:#f4f4f4;border-left:4px solid #00875a;padding:12px;border-radius:4px;font-family:monospace;font-size:11pt;overflow-x:auto;}
+  code{background:#f0f0f0;padding:1px 4px;border-radius:3px;font-family:monospace;}
+  ul,ol{padding-left:20px;}li{margin:3px 0;}
+  .footer{margin-top:32px;padding-top:10px;border-top:1px solid #ccc;font-size:10pt;color:#888;text-align:center;}
+  </style></head><body><h1>${title}</h1><div>${fmt(content)}</div>
+  <div class="footer">Generated by SAGA AI · Created by ${CREATOR.name} · ${CREATOR.city}, ${CREATOR.state}, ${CREATOR.country}</div>
+  </body></html>`;
+}
+
+// DOWNLOAD
+function dlFile(content,name,type){const blob=new Blob([content],{type});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href);fileCount++;}
+
+// MEMORY
+function addMem(){const inp=document.getElementById('memInp');const v=inp.value.trim();if(!v)return;memories.push(v);localStorage.setItem('saga_mem',JSON.stringify(memories));inp.value='';renderMem();logAct('🧠','Memory: '+v.slice(0,28));}
+function delMem(i){memories.splice(i,1);localStorage.setItem('saga_mem',JSON.stringify(memories));renderMem();}
+function renderMem(){const list=document.getElementById('memList');if(!memories.length){list.innerHTML=`<div style="font-size:12px;color:var(--muted2);padding:10px 0;">No memories yet. Add facts about yourself — SAGA will always use them when Memory is ON.</div>`;return;}list.innerHTML=memories.map((m,i)=>`<div class="mem-item"><div class="mem-txt">${m}</div><button class="mem-del" onclick="delMem(${i})">🗑️</button></div>`).join('');}
+
+// POWER SUITE
+const PTC={
+  email:{t:'📧 Email',f:[{id:'ctx',l:'Context',p:'e.g. Asking for leave'},{id:'tone',l:'Tone',p:'e.g. Professional'},{id:'pts',l:'Key Points',p:'Include...',ta:1}],pr:f=>`Write email. Context: ${f.ctx}. Tone: ${f.tone||'professional'}. Points: ${f.pts}.`},
+  report:{t:'📊 Report',f:[{id:'topic',l:'Topic',p:'e.g. Q3 Sales'},{id:'aud',l:'Audience',p:'e.g. Management'},{id:'data',l:'Data',p:'Key findings...',ta:1}],pr:f=>`Professional report on: ${f.topic}. Audience: ${f.aud}. Data: ${f.data}. Executive summary+findings+recommendations.`},
+  script:{t:'🎬 Video Script',f:[{id:'topic',l:'Topic',p:'e.g. How to save money'},{id:'dur',l:'Duration',p:'e.g. 5 min'},{id:'plat',l:'Platform',p:'e.g. YouTube'}],pr:f=>`Video script for ${f.plat||'YouTube'}. Topic: ${f.topic}. Duration: ${f.dur||'3 min'}. Hook+body+CTA.`},
+  proposal:{t:'📋 Proposal',f:[{id:'proj',l:'Project',p:'e.g. App Dev'},{id:'client',l:'Client',p:'e.g. Startup'},{id:'budget',l:'Budget',p:'e.g. ₹50,000'}],pr:f=>`Project proposal for: ${f.proj}. Client: ${f.client}. Budget: ${f.budget}. Scope+timeline+pricing.`},
+  post:{t:'📱 Social Post',f:[{id:'brand',l:'Brand/Topic',p:'e.g. SAGA AI'},{id:'plat',l:'Platform',p:'e.g. Instagram'},{id:'goal',l:'Goal',p:'e.g. Engagement'}],pr:f=>`5 viral ${f.plat||'Instagram'} posts for: ${f.brand}. Goal: ${f.goal}. Captions+emojis+hashtags.`},
+  letter:{t:'✉️ Cover Letter',f:[{id:'role',l:'Job Role',p:'e.g. Engineer'},{id:'skills',l:'Skills',p:'e.g. Python, 3yrs'},{id:'why',l:'Why Company',p:'Reason...',ta:1}],pr:f=>`Cover letter for: ${f.role}. Skills: ${f.skills}. Reason: ${f.why}.`},
+  bio:{t:'👤 Bio',f:[{id:'name',l:'Name & Role',p:'e.g. Guruprasath, Dev'},{id:'hl',l:'Highlights',p:'e.g. Built SAGA AI'},{id:'plat',l:'Platform',p:'e.g. LinkedIn'}],pr:f=>`${f.plat||'LinkedIn'} bio for: ${f.name}. Highlights: ${f.hl}.`},
+  pitch:{t:'🚀 Pitch',f:[{id:'startup',l:'Startup',p:'e.g. AI app'},{id:'stage',l:'Stage',p:'e.g. MVP'},{id:'ask',l:'Ask',p:'e.g. ₹20L'}],pr:f=>`Investor pitch for: ${f.startup}. Stage: ${f.stage}. Ask: ${f.ask}. Problem+solution+market+traction.`},
+  contract:{t:'⚖️ Contract',f:[{id:'type',l:'Type',p:'e.g. NDA'},{id:'parties',l:'Parties',p:'e.g. A & B'},{id:'terms',l:'Terms',p:'Scope...',ta:1}],pr:f=>`${f.type} between ${f.parties}. Terms: ${f.terms}. Professional legal format.`},
+  caption:{t:'📸 Caption',f:[{id:'topic',l:'Photo/Topic',p:'e.g. Sunset'},{id:'vibe',l:'Vibe',p:'e.g. Motivational'},{id:'plat',l:'Platform',p:'e.g. Instagram'}],pr:f=>`5 ${f.vibe||'engaging'} ${f.plat||'Instagram'} captions for: ${f.topic}. Emojis+hashtags.`},
+  ad:{t:'📣 Ad Copy',f:[{id:'prod',l:'Product',p:'e.g. SAGA AI'},{id:'aud',l:'Audience',p:'e.g. Students'},{id:'goal',l:'Goal',p:'e.g. Sign ups'}],pr:f=>`5 high-converting ads for: ${f.prod}. Audience: ${f.aud}. Goal: ${f.goal}. Headline+body+CTA.`},
+  lesson:{t:'📚 Lesson Plan',f:[{id:'sub',l:'Subject',p:"e.g. Newton's Laws"},{id:'level',l:'Level',p:'e.g. Class 10'},{id:'dur',l:'Duration',p:'e.g. 45 min'}],pr:f=>`${f.dur||'45 min'} lesson plan for: ${f.sub}. Level: ${f.level}. Objectives+activities+assessment.`}
+};
+let curPt='email';
+function spt(btn,id){document.querySelectorAll('.pt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');curPt=id;rpt(id);}
+function rpt(id){const cfg=PTC[id];if(!cfg)return;document.getElementById('psContent').innerHTML=`<div class="ps-title">${cfg.t}</div><div class="pform">${cfg.f.map(f=>`<div><div class="plbl">${f.l}</div>${f.ta?`<textarea class="pinput" rows="3" id="pf_${f.id}" placeholder="${f.p}"></textarea>`:`<input class="pinput" id="pf_${f.id}" placeholder="${f.p}">`}</div>`).join('')}<button class="prun" onclick="runPt()">✦ Generate</button></div><div class="presult" id="presult"></div>`;}
+async function runPt(){
+  const cfg=PTC[curPt];const fields={};cfg.f.forEach(f=>{const el=document.getElementById('pf_'+f.id);if(el)fields[f.id]=el.value.trim();});
+  if(!fields[cfg.f[0].id]){alert('Fill required fields.');return;}
+  const res=document.getElementById('presult');res.style.display='block';res.textContent='Generating...';
+  try{
+    const content=await getAI(cfg.pr(fields),`${IDS} World-class professional content creator.`);
+    res.innerHTML=fmt(content);
+    setTimeout(()=>applyEnhancements(res),50);
+    const row=document.createElement('div');row.className='action-row';
+    [{cls:'a-copy',l:'📋 Copy',fn:()=>navigator.clipboard.writeText(content)},
+     {cls:'a-dl',l:'⬇ TXT',fn:()=>dlFile(content,'saga.txt','text/plain')},
+     {cls:'a-word',l:'⬇ Word',fn:()=>dlFile(makeDoc(cfg.t,content),'saga.doc','application/msword')},
+     {cls:'a-pdf',l:'⬇ PDF',fn:()=>makePDF(cfg.t,content)},
+     {cls:'a-share',l:'📲 Share',fn:()=>shareWA(content)}
+    ].forEach(bt=>{const b=document.createElement('button');b.className='ab '+bt.cls;b.textContent=bt.l;b.onclick=()=>{bt.fn();if(bt.l==='📋 Copy'){b.textContent='✓';setTimeout(()=>b.textContent='📋 Copy',1500);}};row.appendChild(b);});
+    res.appendChild(row);
+    logAct(cfg.t.split(' ')[0],'Generated: '+cfg.t);toolsUsed.add(curPt);taskCount++;
+  }catch(e){res.textContent='Error. Add API key in Setup.';}
+}
+
+// DAILY DIGEST
+async function loadDigest(){
+  const today=new Date().toDateString();
+  if(localStorage.getItem('saga_dd')===today)return;
+  try{
+    const h={'Content-Type':'application/json'};if(apiKey){h['x-api-key']=apiKey;h['anthropic-version']='2023-06-01';}
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:h,body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:150,system:IDS,messages:[{role:'user',content:'Give ONE powerful productivity tip for today. Max 2 sentences. Be specific and actionable.'}]})});
+    const d=await r.json();const tip=d.content?.[0]?.text||'';
+    if(tip){localStorage.setItem('saga_dd',today);localStorage.setItem('saga_dt',tip);}
+  }catch(e){}
+}
+
+// STATS
+function logAct(icon,txt){const now=new Date();actLog.unshift({icon,txt,time:now.toLocaleTimeString()});if(actLog.length>30)actLog.pop();}
+function uStats(){
+  document.getElementById('stM').textContent=msgCount;
+  document.getElementById('stT').textContent=Math.round(taskCount*4)+'m';
+  document.getElementById('stF').textContent=fileCount;
+  document.getElementById('stTl').textContent=toolsUsed.size;
+  document.getElementById('stMm').textContent=memories.length;
+  document.getElementById('stCh').textContent=chatHistories.length;
+  document.getElementById('stIm').textContent=imgCount;
+  const dig=localStorage.getItem('saga_dt');
+  const da=document.getElementById('digestArea');
+  if(dig&&da)da.innerHTML=`<div class="digest-card"><strong>⚡ SAGA Daily Tip</strong>${dig}</div>`;
+  const list=document.getElementById('actList');
+  list.innerHTML=actLog.length?actLog.map(a=>`<div class="hi"><div class="hiic">${a.icon}</div><div class="hitx">${a.txt}</div><div class="hitm">${a.time}</div></div>`).join(''):`<div class="hi"><div class="hiic">⚡</div><div class="hitx">No activity yet</div><div class="hitm">now</div></div>`;
+}
+
+// SERVICE WORKER
+if('serviceWorker' in navigator){window.addEventListener('load',()=>{const swCode=`self.addEventListener('fetch',e=>e.respondWith(fetch(e.request).catch(()=>new Response('SAGA AI offline. Connect to internet.',{headers:{'Content-Type':'text/plain'}}))));`;const blob=new Blob([swCode],{type:'application/javascript'});navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});});}
+
+// INIT
+rpt('email');
+renderMem();
+loadDigest();
+if(isDarkMode)document.getElementById('themeBtn').textContent='🌞';
+// Restore saved keys in setup panel
+window.addEventListener('DOMContentLoaded',()=>{});
+</script>
+</body>
+</html>
