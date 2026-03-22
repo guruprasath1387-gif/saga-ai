@@ -1174,7 +1174,7 @@ async function sendStreaming(sys,searchUsed,text){
 
   let fullReply='';
   try{
-    const res=await fetch('https://corsproxy.io/?url=https://api.anthropic.com/v1/messages',{
+    const res=await fetch('https://corsproxy.io/?url=https%3A%2F%2Fapi.anthropic.com%2Fv1%2Fmessages',{
       method:'POST',
       headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
       body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:deepOn?4000:1500,stream:true,system:sys,messages:history})
@@ -1251,7 +1251,7 @@ async function sendRegular(sys,searchUsed,text){
   try{
     const headers={'Content-Type':'application/json'};
     if(apiKey){headers['x-api-key']=apiKey;headers['anthropic-version']='2023-06-01';}
-    const res=await fetch('https://corsproxy.io/?url=https://api.anthropic.com/v1/messages',{method:'POST',headers,body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:deepOn?4000:1500,system:sys,messages:history})});
+    const res=await fetch('https://corsproxy.io/?url=https%3A%2F%2Fapi.anthropic.com%2Fv1%2Fmessages',{method:'POST',headers,body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:deepOn?4000:1500,system:sys,messages:history})});
     const data=await res.json();rmTyping();
     const reply=data.content?.[0]?.text||'Sorry, something went wrong. Please try again.';
     history.push({role:'assistant',content:reply});
@@ -1367,7 +1367,7 @@ async function genRealImg(){
   // Fallback: generate prompts
   try{
     const h={'Content-Type':'application/json'};if(apiKey){h['x-api-key']=apiKey;h['anthropic-version']='2023-06-01';}
-    const res=await fetch('https://corsproxy.io/?url=https://api.anthropic.com/v1/messages',{method:'POST',headers:h,body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:'Return ONLY valid JSON array: [{title,prompt,negative,tips}]',messages:[{role:'user',content:`3 ${style} image prompts for: ${prompt}`}]})});
+    const res=await fetch('https://corsproxy.io/?url=https%3A%2F%2Fapi.anthropic.com%2Fv1%2Fmessages',{method:'POST',headers:h,body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:'Return ONLY valid JSON array: [{title,prompt,negative,tips}]',messages:[{role:'user',content:`3 ${style} image prompts for: ${prompt}`}]})});
     const data=await res.json();
     const ideas=JSON.parse((data.content?.[0]?.text||'[]').replace(/```json|```/g,'').trim());
     out.innerHTML=`<div style="grid-column:1/-1;font-size:11px;color:var(--c4);padding:8px 0;">💡 Add Hugging Face token in ⚙️ Setup for REAL image generation. Below are optimised prompts for Midjourney/DALL·E:</div>`;
@@ -1417,7 +1417,7 @@ async function aiWriteCode(){
   document.getElementById('codeEditor').value='// Generating...';
   try{
     const h={'Content-Type':'application/json'};if(apiKey){h['x-api-key']=apiKey;h['anthropic-version']='2023-06-01';}
-    const r=await fetch('https://corsproxy.io/?url=https://api.anthropic.com/v1/messages',{method:'POST',headers:h,body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:`${IDS} Write only ${lang} code. No markdown, no backticks, no explanation.`,messages:[{role:'user',content:`Write ${lang} code to: ${task}`}]})});
+    const r=await fetch('https://corsproxy.io/?url=https%3A%2F%2Fapi.anthropic.com%2Fv1%2Fmessages',{method:'POST',headers:h,body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:`${IDS} Write only ${lang} code. No markdown, no backticks, no explanation.`,messages:[{role:'user',content:`Write ${lang} code to: ${task}`}]})});
     const data=await r.json();
     document.getElementById('codeEditor').value=(data.content?.[0]?.text||'// Error').replace(/```\w*\n?/g,'').replace(/```/g,'').trim();
     logAct('💻','AI wrote: '+task.slice(0,30));
@@ -1427,7 +1427,7 @@ async function aiWriteCode(){
 // AI CONTENT HELPER
 async function getAI(prompt,sys){
   const h={'Content-Type':'application/json'};if(apiKey){h['x-api-key']=apiKey;h['anthropic-version']='2023-06-01';}
-  const r=await fetch('https://corsproxy.io/?url=https://api.anthropic.com/v1/messages',{method:'POST',headers:h,body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,system:sys||IDS,messages:[{role:'user',content:prompt}]})});
+  const r=await fetch('https://corsproxy.io/?url=https%3A%2F%2Fapi.anthropic.com%2Fv1%2Fmessages',{method:'POST',headers:h,body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,system:sys||IDS,messages:[{role:'user',content:prompt}]})});
   const d=await r.json();return d.content?.[0]?.text||'';
 }
 
@@ -1647,7 +1647,7 @@ async function loadDigest(){
   if(localStorage.getItem('saga_dd')===today)return;
   try{
     const h={'Content-Type':'application/json'};if(apiKey){h['x-api-key']=apiKey;h['anthropic-version']='2023-06-01';}
-    const r=await fetch('https://corsproxy.io/?url=https://api.anthropic.com/v1/messages',{method:'POST',headers:h,body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:150,system:IDS,messages:[{role:'user',content:'Give ONE powerful productivity tip for today. Max 2 sentences. Be specific and actionable.'}]})});
+    const r=await fetch('https://corsproxy.io/?url=https%3A%2F%2Fapi.anthropic.com%2Fv1%2Fmessages',{method:'POST',headers:h,body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:150,system:IDS,messages:[{role:'user',content:'Give ONE powerful productivity tip for today. Max 2 sentences. Be specific and actionable.'}]})});
     const d=await r.json();const tip=d.content?.[0]?.text||'';
     if(tip){localStorage.setItem('saga_dd',today);localStorage.setItem('saga_dt',tip);}
   }catch(e){}
