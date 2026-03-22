@@ -1151,7 +1151,7 @@ async function send(){
   attachedImages=[];attachedFiles=[];document.getElementById('attachPrev').innerHTML='';
 
   // Try streaming first, fall back to regular if streaming not supported
-  const hasStream = apiKey; // streaming only works with direct API key
+  const hasStream = false; // disabled for GitHub Pages compatibility
   if(hasStream){
     await sendStreaming(sys,searchUsed,text);
   } else {
@@ -1177,7 +1177,7 @@ async function sendStreaming(sys,searchUsed,text){
     const res=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent('https://api.anthropic.com/v1/messages'),{
       method:'POST',
       headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:deepOn?4000:1500,stream:true,system:sys,messages:history})
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:deepOn?4000:1500,stream:false,system:sys,messages:history})
     });
     if(!res.ok||!res.body){await sendRegular(sys,searchUsed,text);d.remove();return;}
     const reader=res.body.getReader();const decoder=new TextDecoder();
